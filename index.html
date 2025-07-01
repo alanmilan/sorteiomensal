@@ -42,7 +42,7 @@
 
     .roleta {
       display: flex;
-      transition: transform 3.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
       transform: translateX(0);
     }
 
@@ -84,32 +84,28 @@
     }
 
     button {
+      padding: 12px 30px;
       border-radius: 6px;
       border: none;
-      cursor: pointer;
+      font-size: 16px;
+      background: #00c97b;
       color: white;
+      cursor: pointer;
+      margin: 10px 0;
     }
 
-    #btnGirar {
-      width: 200px;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      background: #00c97b;
-      margin-bottom: 10px;
-    }
-    #btnGirar:hover {
+    button:hover {
       background: #00e08c;
     }
 
-    #btnReset {
-      width: 100px;
-      padding: 8px;
-      font-size: 14px;
-      background: #e74c3c;
+    .btn-reset {
+      background: #c92424;
+      font-size: 12px;
+      padding: 6px 14px;
     }
-    #btnReset:hover {
-      background: #ff4c4c;
+
+    .btn-reset:hover {
+      background: #e03c3c;
     }
 
     #resultado {
@@ -154,10 +150,8 @@
 
   <h2 id="resultado"></h2>
 
-  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 15px;">
-    <button id="btnGirar" onclick="girarRoleta()">Girar Roleta</button>
-    <button id="btnReset" onclick="confirmarReset()">Resetar Itens</button>
-  </div>
+  <button onclick="girarRoleta()"> Girar Roleta</button>
+  <button class="btn-reset" onclick="confirmarReset()">Resetar Itens</button>
 
   <table>
     <thead>
@@ -190,23 +184,23 @@
     ];
 
     const imagens = {
-    "★ Shadow Dagger Marble Fade": "images/shadow.png",
-     "★ Ursus Marble Fade": "images/ursus.png",
-  "★ Butterfly Marble Fade": "images/butterfly.png",
-  "★ Karambit Marble Fade": "images/karambit.png",
-  "★ Survival Marble Fade": "images/survival.png",
-  "★ Talon Marble Fade": "images/talon.png",
-  "★ Navaja Marble Fade": "images/navaja.png",
-  "★ Flip Marble Fade": "images/flip.png",
-  "★ Falchion Marble Fade": "images/falchion.png",
-  "★ Bayonet Marble Fade": "images/bayonet.png",
-  "★ M9 Marble Fade": "images/m9.png",
-  "★ Specialist Gloves - Marble Fade": "images/glove.png",
-  "AWP Medusa": "images/medusa.png",
-  "AK-47 - Gold Arabesque": "images/golden.png",
-  "★ Nomad Marble Fade": "images/nomad.png",
-  "★ Bowie Marble Fade": "images/bowie.png",
-  "★ Gut Marble Fade": "images/gut.png"
+      "★ Shadow Dagger Marble Fade": "shadow.png",
+      "★ Ursus Marble Fade": "ursus.png",
+      "★ Butterfly Marble Fade": "butterfly.png",
+      "★ Karambit Marble Fade": "karambit.png",
+      "★ Survival Marble Fade": "survival.png",
+      "★ Talon Marble Fade": "talon.png",
+      "★ Navaja Marble Fade": "navaja.png",
+      "★ Flip Marble Fade": "flip.png",
+      "★ Falchion Marble Fade": "falchion.png",
+      "★ Bayonet Marble Fade": "bayonet.png",
+      "★ M9 Marble Fade": "m9.png",
+      "★ Specialist Gloves - Marble Fade": "glove.png",
+      "AWP Medusa": "medusa.png",
+      "AK-47 - Gold Arabesque": "golden.png",
+      "★ Nomad Marble Fade": "nomad.png",
+      "★ Bowie Marble Fade": "bowie.png",
+      "★ Gut Marble Fade": "gut.png"
     };
 
     const roleta = document.getElementById("roleta");
@@ -225,18 +219,18 @@
       localStorage.setItem("itensRoleta", JSON.stringify(itens));
     }
 
+    function confirmarReset() {
+      if (confirm("Você quer mesmo resetar os itens?")) {
+        resetarItens();
+      }
+    }
+
     function resetarItens() {
       localStorage.removeItem("itensRoleta");
       itens = carregarItens();
       atualizarTabela();
       reconstruirRoleta();
       resultado.textContent = "";
-    }
-
-    function confirmarReset() {
-      if (confirm("Você quer mesmo resetar os itens?")) {
-        resetarItens();
-      }
     }
 
     let itens = carregarItens();
@@ -258,7 +252,7 @@
         div.className = "item";
         div.dataset.nome = nome;
         div.innerHTML = `
-          <img src="${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
+          <img src="images/${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
           <span>${nome}</span>
         `;
         roleta.appendChild(div);
@@ -289,10 +283,11 @@
       roleta.style.transition = "none";
       roleta.style.transform = "translateX(0)";
       void roleta.offsetWidth;
+
       setTimeout(() => {
-        roleta.style.transition = "transform 3.5s cubic-bezier(0.16, 1, 0.3, 1)";
+        roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
         roleta.style.transform = `translateX(-${destino - (roleta.parentElement.offsetWidth / 2) + (itemFullWidth / 2)}px)`;
-        iniciarTickDuranteGiro(3500);
+        iniciarTickDuranteGiro(12000);
       });
 
       setTimeout(() => {
@@ -303,7 +298,7 @@
         salvarItens(itens);
         atualizarTabela();
         isSpinning = false;
-      }, 3700);
+      }, 12200);
     }
 
     function iniciarTickDuranteGiro(duracaoTotal) {
