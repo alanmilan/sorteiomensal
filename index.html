@@ -83,29 +83,40 @@
       z-index: 10;
     }
 
-    button {
+    .botoes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    #botaoGirar {
       padding: 12px 30px;
-      border-radius: 6px;
-      border: none;
       font-size: 16px;
       background: #00c97b;
       color: white;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      margin: 10px 0;
     }
 
-    button:hover {
+    #botaoGirar:hover {
       background: #00e08c;
     }
 
-    .btn-reset {
-      background: #c92424;
-      font-size: 12px;
-      padding: 6px 14px;
+    #botaoReset {
+      padding: 6px 15px;
+      font-size: 13px;
+      background: #d62828;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
 
-    .btn-reset:hover {
-      background: #e03c3c;
+    #botaoReset:hover {
+      background: #e63946;
     }
 
     #resultado {
@@ -135,22 +146,12 @@
     th {
       background: #222c3c;
       color: white;
-    }    
-    
+    }
+
     footer {
-      margin-top: 40px;
-      padding: 20px 0;
-      color: #aaa;
+      margin-top: 30px;
       font-size: 14px;
-    }
-
-    footer a {
-      color: #800080;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+      color: #aaa;
     }
   </style>
 </head>
@@ -166,8 +167,10 @@
 
   <h2 id="resultado"></h2>
 
-  <button onclick="girarRoleta()"> Girar Roleta</button>
-  <button class="btn-reset" onclick="confirmarReset()">Resetar Itens</button>
+  <div class="botoes">
+    <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>
+    <button id="botaoReset" onclick="confirmarReset()">Resetar Itens</button>
+  </div>
 
   <table>
     <thead>
@@ -178,45 +181,40 @@
 
   <audio id="tickSound" src="tick_sound.mp3" preload="auto"></audio>
 
+  <footer>
+    Feito por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
+  </footer>
+
   <script>
     const itensBase = [
-      "★ Shadow Dagger Marble Fade",
-      "★ Ursus Marble Fade",
-      "★ Butterfly Marble Fade",
-      "★ Karambit Marble Fade",
-      "★ Survival Marble Fade",
-      "★ Talon Marble Fade",
-      "★ Navaja Marble Fade",
-      "★ Flip Marble Fade",
-      "★ Falchion Marble Fade",
-      "★ Bayonet Marble Fade",
-      "★ M9 Marble Fade",
-      "★ Specialist Gloves - Marble Fade",
-      "AWP Medusa",
-      "AK-47 - Gold Arabesque",
-      "★ Nomad Marble Fade",
-      "★ Bowie Marble Fade",
-      "★ Gut Marble Fade"
+      "★ Shadow Dagger Marble Fade", "★ Ursus Marble Fade", "★ Butterfly Marble Fade", "★ Karambit Marble Fade", "★ Survival Marble Fade",
+      "★ Talon Marble Fade", "★ Navaja Marble Fade", "★ Flip Marble Fade", "★ Falchion Marble Fade", "★ Bayonet Marble Fade",
+      "★ M9 Marble Fade", "★ Specialist Gloves - Marble Fade", "AWP Medusa", "AK-47 - Gold Arabesque", "★ Nomad Marble Fade",
+      "★ Bowie Marble Fade", "★ Gut Marble Fade", "★ Stiletto Marble Fade", "★ Huntsman Marble Fade", "★ Skeleton Marble Fade", "★ Paracord Marble Fade"
     ];
 
     const imagens = {
-      "★ Shadow Dagger Marble Fade": "shadow.png",
-      "★ Ursus Marble Fade": "ursus.png",
-      "★ Butterfly Marble Fade": "butterfly.png",
-      "★ Karambit Marble Fade": "karambit.png",
-      "★ Survival Marble Fade": "survival.png",
-      "★ Talon Marble Fade": "talon.png",
-      "★ Navaja Marble Fade": "navaja.png",
-      "★ Flip Marble Fade": "flip.png",
-      "★ Falchion Marble Fade": "falchion.png",
-      "★ Bayonet Marble Fade": "bayonet.png",
-      "★ M9 Marble Fade": "m9.png",
-      "★ Specialist Gloves - Marble Fade": "glove.png",
-      "AWP Medusa": "medusa.png",
-      "AK-47 - Gold Arabesque": "golden.png",
-      "★ Nomad Marble Fade": "nomad.png",
-      "★ Bowie Marble Fade": "bowie.png",
-      "★ Gut Marble Fade": "gut.png"
+      "★ Shadow Dagger Marble Fade": "images/shadow.png",
+      "★ Ursus Marble Fade": "images/ursus.png",
+      "★ Butterfly Marble Fade": "images/butterfly.png",
+      "★ Karambit Marble Fade": "images/karambit.png",
+      "★ Survival Marble Fade": "images/survival.png",
+      "★ Talon Marble Fade": "images/talon.png",
+      "★ Navaja Marble Fade": "images/navaja.png",
+      "★ Flip Marble Fade": "images/flip.png",
+      "★ Falchion Marble Fade": "images/falchion.png",
+      "★ Bayonet Marble Fade": "images/bayonet.png",
+      "★ M9 Marble Fade": "images/m9.png",
+      "★ Specialist Gloves - Marble Fade": "images/glove.png",
+      "AWP Medusa": "images/medusa.png",
+      "AK-47 - Gold Arabesque": "images/golden.png",
+      "★ Nomad Marble Fade": "images/nomad.png",
+      "★ Bowie Marble Fade": "images/bowie.png",
+      "★ Gut Marble Fade": "images/gut.png",
+      "★ Stiletto Marble Fade": "images/stiletto.png",
+      "★ Huntsman Marble Fade": "images/huntsman.png",
+      "★ Skeleton Marble Fade": "images/skeleton.png",
+      "★ Paracord Marble Fade": "images/paracord.png"
     };
 
     const roleta = document.getElementById("roleta");
@@ -268,7 +266,7 @@
         div.className = "item";
         div.dataset.nome = nome;
         div.innerHTML = `
-          <img src="images/${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
+          <img src="${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
           <span>${nome}</span>
         `;
         roleta.appendChild(div);
@@ -284,7 +282,7 @@
       if (isSpinning) return;
       const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0);
       if (disponiveis.length === 0) {
-        resultado.textContent = "🎉 Todos os itens foram sorteados!";
+        resultado.innerHTML = '<img src="images/todos_sorteados.png" alt="Todos os itens foram sorteados!" style="max-width: 100%; margin-top: 20px;">';
         return;
       }
 
@@ -299,7 +297,6 @@
       roleta.style.transition = "none";
       roleta.style.transform = "translateX(0)";
       void roleta.offsetWidth;
-
       setTimeout(() => {
         roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
         roleta.style.transform = `translateX(-${destino - (roleta.parentElement.offsetWidth / 2) + (itemFullWidth / 2)}px)`;
@@ -309,7 +306,7 @@
       setTimeout(() => {
         items.forEach(i => i.classList.remove("highlight"));
         alvo.classList.add("highlight");
-        resultado.textContent = `O Item sorteado será: ${nomeSorteado}`;
+        resultado.textContent = `🎯 Item sorteado será: ${nomeSorteado}`;
         itens[nomeSorteado] = 0;
         salvarItens(itens);
         atualizarTabela();
@@ -354,9 +351,5 @@
     atualizarTabela();
     reconstruirRoleta(getRandomDisponivel());
   </script>
-  
-  <footer>
-    Feito por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
-  </footer>
 </body>
 </html>
