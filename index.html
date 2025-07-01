@@ -310,7 +310,7 @@
       setTimeout(() => {
         items.forEach(i => i.classList.remove("highlight"));
         alvo.classList.add("highlight");
-        resultado.textContent = `O Item sorteado será: ${nomeSorteado}`;
+        resultado.textContent = `🎯 Item sorteado será: ${nomeSorteado}`;
         itens[nomeSorteado] = 0;
         salvarItens(itens);
         atualizarTabela();
