@@ -148,6 +148,18 @@
       color: white;
     }
 
+    tr.disponivel td {
+      background-color: #575555; /* vermelho escuro */
+      color: white;
+      font-weight: bold;
+    }
+
+    tr.sorteado td {
+      background-color: #1eaf4d; /* verde */
+      color: white;
+      font-weight: bold;
+    }
+
     footer {
       margin-top: 30px;
       font-size: 14px;
@@ -252,7 +264,8 @@
       tabela.innerHTML = "";
       for (const [nome, qtd] of Object.entries(itens)) {
         const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "Disponível" : "Sorteado"}</td>`;
+        tr.className = qtd > 0 ? "disponivel" : "sorteado";
+        tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "Não sorteado" : "Sorteado"}</td>`;
         tabela.appendChild(tr);
       }
     }
