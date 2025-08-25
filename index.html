@@ -195,6 +195,7 @@
   </div>
 
   <audio id="tickSound" src="tick_sound.mp3" preload="auto"></audio>
+  <audio id="dloreSound" src="dlore.mp3" preload="auto"></audio>
 
   <footer>
     Feito por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
@@ -235,6 +236,7 @@
     const tabela = document.getElementById("tabelaItens");
     const resultado = document.getElementById("resultado");
     const tickSound = document.getElementById("tickSound");
+    const dloreSound = document.getElementById("dloreSound");
     const itemFullWidth = 200;
     let isSpinning = false;
 
@@ -326,6 +328,11 @@
         salvarItens(itens);
         atualizarTabela();
         isSpinning = false;
+
+        if (nomeSorteado === "AWP Dragon Lore") {
+          dloreSound.play();
+        }
+
       }, 12200);
     }
 
