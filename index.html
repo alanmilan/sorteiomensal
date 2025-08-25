@@ -180,8 +180,7 @@
   <h2 id="resultado"></h2>
 
   <div class="botoes">
-    <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>
-    <button id="botaoReset" onclick="confirmarReset()">Resetar Itens</button>
+    <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>    
   </div>
 
   <table>
@@ -190,6 +189,10 @@
     </thead>
     <tbody id="tabelaItens"></tbody>
   </table>
+  
+  <div class="botoes">
+  <button id="botaoReset" onclick="confirmarReset()">Resetar Itens</button>
+  </div>
 
   <audio id="tickSound" src="tick_sound.mp3" preload="auto"></audio>
 
@@ -199,7 +202,7 @@
 
   <script>
     const itensBase = [
-      "★ Shadow Dagger Gamma Doppler", "★ Shadow Dagger Gamma Doppler(2)", "★ Butterfly Gamma Doppler", "★ Karambit Gamma Doppler", "★ Navaja Gamma Doppler", "★ Flip Gamma Doppler", "★ Falchion Gamma Doppler", "★ Bayonet Gamma Doppler",
+      "★ Shadow Dagger Gamma Doppler", "★ Shadow Dagger Gamma Doppler(2)", "★ Butterfly Gamma Doppler", "★ Karambit Gamma Doppler", "★ Bowie Gamma Doppler(2)", "★ Flip Gamma Doppler", "★ Falchion Gamma Doppler", "★ Bayonet Gamma Doppler",
       "★ M9 Gamma Doppler", "AWP Dragon Lore","★ Huntsman Gamma Doppler", "★ Hand Wraps Caution",
       "★ Bowie Gamma Doppler", "★ Gut Gamma Doppler", "★ Gut Gamma Doppler(2)", "Glock Gamma Doppler",  "Glock Gamma Doppler(2)", "★ Hand Wraps Overprint", "★ MotorGloves Turtle", "★ Broken Fang Gloves Jade",
         ];
@@ -208,8 +211,7 @@
       "★ Shadow Dagger Gamma Doppler": "images/shadow.png",
       "★ Shadow Dagger Gamma Doppler(2)": "images/shadow.png",      
       "★ Butterfly Gamma Doppler": "images/butterfly.png",
-      "★ Karambit Gamma Doppler": "images/karambit.png",      
-      "★ Navaja Gamma Doppler": "images/navaja.png",
+      "★ Karambit Gamma Doppler": "images/karambit.png",       
       "★ Flip Gamma Doppler": "images/flip.png",
       "★ Falchion Gamma Doppler": "images/falchion.png",
       "★ Bayonet Gamma Doppler": "images/bayonet.png",
@@ -218,6 +220,7 @@
       "★ Hand Wraps Caution": "images/caution.png",
       "AWP Dragon Lore": "images/lore.png",        
       "★ Bowie Gamma Doppler": "images/bowie.png",
+      "★ Bowie Gamma Doppler(2)": "images/bowie.png",
       "★ Gut Gamma Doppler": "images/gut.png",
       "★ Gut Gamma Doppler(2)": "images/gut.png",
       "Glock Gamma Doppler": "images/glock.png",
