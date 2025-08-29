@@ -1,383 +1,447 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Roleta do Sorteio Mensal</title>
-  <style>
-    body {     
-      background: 
-      linear-gradient(135deg, rgba(0,255,100,0.4) 0%, rgba(0,0,0,0) 50%),
-      linear-gradient(45deg, rgba(0,200,255,0.4) 0%, rgba(0,0,0,0) 50%),
-      linear-gradient(225deg, rgba(50,255,150,0.4) 0%, rgba(0,0,0,0) 50%),
-      linear-gradient(315deg, rgba(0,150,255,0.4) 0%, rgba(0,0,0,0) 50%),
-       #1f222b;
-      background-blend-mode:overlay;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <meta charset="UTF-8" />
+    <title>Roleta do Sorteio Mensal</title>
+    <style>
+        body { 
+            background: 
+            linear-gradient(135deg, rgba(0,255,100,0.4) 0%, rgba(0,0,0,0) 50%),
+            linear-gradient(45deg, rgba(0,200,255,0.4) 0%, rgba(0,0,0,0) 50%),
+            linear-gradient(225deg, rgba(50,255,150,0.4) 0%, rgba(0,0,0,0) 50%),
+            linear-gradient(315deg, rgba(0,150,255,0.4) 0%, rgba(0,0,0,0) 50%),
+             #1f222b;
+            background-blend-mode:overlay;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .logo-canto {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      width: 100px;
-    }
+        .logo-canto {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 100px;
+        }
 
-    .banner-topo {
-      width: 100%;
-      max-width: 920px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    }
+        .banner-topo {
+            width: 100%;
+            max-width: 920px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        }
 
-    .roleta-container {
-      width: 900px;
-      margin: 0 auto 10px;
-      overflow: hidden;
-      border: 3px solid #444;
-      border-radius: 15px;
-      background: #1e1e2f;
-      position: relative;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
+        .roleta-container {
+            width: 900px;
+            margin: 0 auto 10px;
+            overflow: hidden;
+            border: 3px solid #444;
+            border-radius: 15px;
+            background: #1e1e2f;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
 
-    .roleta {
-      display: flex;
-      transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: translateX(0);
-    }
+        .roleta {
+            display: flex;
+            transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(0);
+        }
 
-    .item {
-      min-width: 180px;
-      height: 180px;
-      margin: 0 10px;
-      background: #2a2f45;
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      flex-shrink: 0;
-      font-size: 14px;
-      text-align: center;
-      padding: 10px;
-      color: #fff;
-    }
+        .item {
+            min-width: 180px;
+            height: 180px;
+            margin: 0 10px;
+            background: #2a2f45;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            font-size: 14px;
+            text-align: center;
+            padding: 10px;
+            color: #fff;
+        }
 
-    .item.highlight {
-      background: #1eaf4d;
-      box-shadow: 0 0 25px #00ff99, inset 0 0 10px white;
-      transform: scale(1.1);
-    }
+        .item.highlight {
+            background: #1eaf4d;
+            box-shadow: 0 0 25px #00ff99, inset 0 0 10px white;
+            transform: scale(1.1);
+        }
 
-    .roleta-pointer {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-top: 30px solid #ffcc00;
-      z-index: 10;
-    }
+        .roleta-pointer {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid #ffcc00;
+            z-index: 10;
+        }
 
-    .botoes {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-    }
+        .botoes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
 
-    #botaoGirar {
-      padding: 12px 30px;
-      font-size: 16px;
-      background: #00c97b;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+        #botaoGirar {
+            padding: 12px 30px;
+            font-size: 16px;
+            background: #00c97b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-    #botaoGirar:hover {
-      background: #00e08c;
-    }
+        #botaoGirar:hover {
+            background: #00e08c;
+        }
 
-    #botaoReset {
-      padding: 6px 15px;
-      font-size: 13px;
-      background: #d62828;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+        #botaoReset {
+            padding: 6px 15px;
+            font-size: 13px;
+            background: #d62828;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    #botaoReset:hover {
-      background: #e63946;
-    }
+        #botaoReset:hover {
+            background: #e63946;
+        }
 
-    #resultado {
-      margin-top: 15px;
-      font-size: 20px;
-      color: #00ffcc;
-    }
+        #resultado {
+            margin-top: 15px;
+            font-size: 20px;
+            color: #00ffcc;
+        }
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 900px;
-      margin: 20px auto 0;
-      background: #111826;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
+        /* Novo estilo para o botão de preview */
+        #botaoPreview {
+            padding: 10px 20px;
+            font-size: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-    th, td {
-      border: 1px solid #333;
-      padding: 8px;
-      text-align: center;
-      font-size: 14px;
-    }
+        #botaoPreview:hover {
+            background: #0056b3;
+        }
 
-    th {
-      background: #222c3c;
-      color: white;
-    }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto 0;
+            background: #111826;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
 
-    tr.disponivel td {
-      background-color: #575555; /* vermelho escuro */
-      color: white;
-      font-weight: bold;
-    }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
 
-    tr.sorteado td {
-      background-color: #1eaf4d; /* verde */
-      color: white;
-      font-weight: bold;
-    }
+        th {
+            background: #222c3c;
+            color: white;
+        }
 
-    footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #aaa;
-    }
-  </style>
+        tr.disponivel td {
+            background-color: #575555; /* vermelho escuro */
+            color: white;
+            font-weight: bold;
+        }
+
+        tr.sorteado td {
+            background-color: #1eaf4d; /* verde */
+            color: white;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
 </head>
 <body>
 
-  <img src="images/saullologo.png" alt="Logo" class="logo-canto">
-  <img src="images/banner.png" alt="Banner" class="banner-topo">
+    <img src="images/saullologo.png" alt="Logo" class="logo-canto">
+    <img src="images/banner.png" alt="Banner" class="banner-topo">
 
-  <div class="roleta-container">
-    <div class="roleta" id="roleta"></div>
-    <div class="roleta-pointer"></div>
-  </div>
+    <div class="roleta-container">
+        <div class="roleta" id="roleta"></div>
+        <div class="roleta-pointer"></div>
+    </div>
 
-  <h2 id="resultado"></h2>
+    <h2 id="resultado"></h2>
 
-  <div class="botoes">
-    <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>    
-  </div>
+    <div class="botoes">
+        <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>    
+        <button id="botaoPreview" style="display:none;">Preview no CS2</button>
+    </div>
 
-  <table>
-    <thead>
-      <tr><th>Item</th><th>Status</th></tr>
-    </thead>
-    <tbody id="tabelaItens"></tbody>
-  </table>
-  
-  <div class="botoes">
-  <button id="botaoReset" onclick="confirmarReset()">Resetar Itens</button>
-  </div>
+    <table>
+        <thead>
+            <tr><th>Item</th><th>Status</th></tr>
+        </thead>
+        <tbody id="tabelaItens"></tbody>
+    </table>
+    
+    <div class="botoes">
+    <button id="botaoReset" onclick="confirmarReset()">Resetar Itens</button>
+    </div>
 
-  <audio id="tickSound" src="tick_sound.mp3" preload="auto"></audio>
-  <audio id="dloreSound" src="dlore.mp3" preload="auto"></audio>
+    <audio id="tickSound" src="tick_sound.mp3" preload="auto"></audio>
+    <audio id="dloreSound" src="dlore.mp3" preload="auto"></audio>
 
-  <footer>
-    Feito por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
-  </footer>
+    <footer>
+        Feito por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
+    </footer>
 
-  <script>
-    const itensBase = [
-      "★ Shadow Dagger Gamma Doppler", "★ Shadow Dagger Gamma Doppler(2)", "★ Butterfly Gamma Doppler", "★ Karambit Gamma Doppler", "★ Flip Gamma Doppler", "★ Falchion Gamma Doppler", "★ Bayonet Gamma Doppler",
-      "★ M9 Gamma Doppler", "AWP Dragon Lore","★ Huntsman Gamma Doppler", "★ Hand Wraps Caution",
-      "★ Bowie Gamma Doppler","★ Bowie Gamma Doppler(2)",  "★ Gut Gamma Doppler", "★ Gut Gamma Doppler(2)", "Glock Gamma Doppler",  "Glock Gamma Doppler(2)", "★ Hand Wraps Overprint", "★ MotorGloves Turtle", "★ Broken Fang Gloves Jade",
+    <script>
+        const itensBase = [
+            "★ Shadow Dagger Gamma Doppler", "★ Shadow Dagger Gamma Doppler(2)", "★ Butterfly Gamma Doppler", "★ Karambit Gamma Doppler", "★ Flip Gamma Doppler", "★ Falchion Gamma Doppler", "★ Bayonet Gamma Doppler",
+            "★ M9 Gamma Doppler", "AWP Dragon Lore","★ Huntsman Gamma Doppler", "★ Hand Wraps Caution",
+            "★ Bowie Gamma Doppler","★ Bowie Gamma Doppler(2)", "★ Gut Gamma Doppler", "★ Gut Gamma Doppler(2)", "Glock Gamma Doppler", "Glock Gamma Doppler(2)", "★ Hand Wraps Overprint", "★ MotorGloves Turtle", "★ Broken Fang Gloves Jade",
         ];
 
-    const imagens = {
-      "★ Shadow Dagger Gamma Doppler": "images/shadow.png",
-      "★ Shadow Dagger Gamma Doppler(2)": "images/shadow.png",      
-      "★ Butterfly Gamma Doppler": "images/butterfly.png",
-      "★ Karambit Gamma Doppler": "images/karambit.png",       
-      "★ Flip Gamma Doppler": "images/flip.png",
-      "★ Falchion Gamma Doppler": "images/falchion.png",
-      "★ Bayonet Gamma Doppler": "images/bayonet.png",
-      "★ Huntsman Gamma Doppler": "images/huntsman.png",
-      "★ M9 Gamma Doppler": "images/m9.png",
-      "★ Hand Wraps Caution": "images/caution.png",
-      "AWP Dragon Lore": "images/lore.png",        
-      "★ Bowie Gamma Doppler": "images/bowie.png",
-      "★ Bowie Gamma Doppler(2)": "images/bowie.png",
-      "★ Gut Gamma Doppler": "images/gut.png",
-      "★ Gut Gamma Doppler(2)": "images/gut.png",
-      "Glock Gamma Doppler": "images/glock.png",
-      "Glock Gamma Doppler(2)": "images/glock.png",
-      "★ Huntsman Gamma Doppler": "images/huntsman.png",
-      "★ Hand Wraps Overprint": "images/overprint.png",
-      "★ Broken Fang Gloves Jade": "images/jade.png",
-      "★ MotorGloves Turtle": "images/turtle.png"
-    };
+        const imagens = {
+            "★ Shadow Dagger Gamma Doppler": "images/shadow.png",
+            "★ Shadow Dagger Gamma Doppler(2)": "images/shadow.png", 
+            "★ Butterfly Gamma Doppler": "images/butterfly.png",
+            "★ Karambit Gamma Doppler": "images/karambit.png", 
+            "★ Flip Gamma Doppler": "images/flip.png",
+            "★ Falchion Gamma Doppler": "images/falchion.png",
+            "★ Bayonet Gamma Doppler": "images/bayonet.png",
+            "★ Huntsman Gamma Doppler": "images/huntsman.png",
+            "★ M9 Gamma Doppler": "images/m9.png",
+            "★ Hand Wraps Caution": "images/caution.png",
+            "AWP Dragon Lore": "images/lore.png", 
+            "★ Bowie Gamma Doppler": "images/bowie.png",
+            "★ Bowie Gamma Doppler(2)": "images/bowie.png",
+            "★ Gut Gamma Doppler": "images/gut.png",
+            "★ Gut Gamma Doppler(2)": "images/gut.png",
+            "Glock Gamma Doppler": "images/glock.png",
+            "Glock Gamma Doppler(2)": "images/glock.png",
+            "★ Huntsman Gamma Doppler": "images/huntsman.png",
+            "★ Hand Wraps Overprint": "images/overprint.png",
+            "★ Broken Fang Gloves Jade": "images/jade.png",
+            "★ MotorGloves Turtle": "images/turtle.png"
+        };
+        
+        // Dicionário com os links de preview
+        // Note: You must replace these with the correct preview links for each item.
+        // The one for AWP Dragon Lore is provided as an example.
+        const previewLinks = {
+            "AWP Dragon Lore": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44971908744D5505897430664803501",
+            "★ Shadow Dagger Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44951288168D7406919660377001228",
+            "★ Shadow Dagger Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020507034D3332675066730825576",
+            "★ Butterfly Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45004817448D12432299293694780977",
+            "★ Karambit Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45006424255D17205448949357566513",
+            "★ Flip Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44972133607D9404754678570262081",
+            "★ Falchion Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45462522208D344184750001155244",
+            "★ Bayonet Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44972060714D14719113968133712360",
+            "★ Huntsman Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45462537569D7928211983792985985",
+            "★ M9 Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44951217436D4784582742738156452",
+            "★ Hand Wraps Caution": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020582387D14412555179749867008",
+            "★ Bowie Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020378913D778601912978416732",
+            "★ Bowie Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020378913D778601912978416732",
+            "★ Gut Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020524310D7396788561268946516",
+            "★ Gut Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020524310D7396788561268946516",
+            "Glock Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020545710D4921428090481422272",
+            "Glock Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020489561D7974342661140311460",
+            "★ Hand Wraps Overprint": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45023385033D2363031218579224140",
+            "★ Broken Fang Gloves Jade": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45023435069D11972749491598125933",
+            "★ MotorGloves Turtle": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45023404666D14873640072767665857",
 
-    const roleta = document.getElementById("roleta");
-    const tabela = document.getElementById("tabelaItens");
-    const resultado = document.getElementById("resultado");
-    const tickSound = document.getElementById("tickSound");
-    const dloreSound = document.getElementById("dloreSound");
-    const itemFullWidth = 200;
-    let isSpinning = false;
 
-    function carregarItens() {
-      const salvo = localStorage.getItem("itensRoleta");
-      return salvo ? JSON.parse(salvo) : Object.fromEntries(itensBase.map(i => [i, 1]));
-    }
+            
+        };
 
-    function salvarItens(itens) {
-      localStorage.setItem("itensRoleta", JSON.stringify(itens));
-    }
+        const roleta = document.getElementById("roleta");
+        const tabela = document.getElementById("tabelaItens");
+        const resultado = document.getElementById("resultado");
+        const tickSound = document.getElementById("tickSound");
+        const dloreSound = document.getElementById("dloreSound");
+        const botaoPreview = document.getElementById("botaoPreview");
+        const itemFullWidth = 200;
+        let isSpinning = false;
+        let lastSortedItem = null; // Para armazenar o último item sorteado
 
-    function confirmarReset() {
-      if (confirm("Você quer mesmo resetar os itens?")) {
-        resetarItens();
-      }
-    }
-
-    function resetarItens() {
-      localStorage.removeItem("itensRoleta");
-      itens = carregarItens();
-      atualizarTabela();
-      reconstruirRoleta();
-      resultado.textContent = "";
-    }
-
-    let itens = carregarItens();
-
-    function atualizarTabela() {
-      tabela.innerHTML = "";
-      for (const [nome, qtd] of Object.entries(itens)) {
-        const tr = document.createElement("tr");
-        tr.className = qtd > 0 ? "disponivel" : "sorteado";
-        tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "Não sorteado" : "Sorteado"}</td>`;
-        tabela.appendChild(tr);
-      }
-    }
-
-    function reconstruirRoleta(nomeSorteado) {
-      roleta.innerHTML = "";
-      for (let i = 0; i < 100; i++) {
-        const nome = (i === 50) ? nomeSorteado : getRandomDisponivel();
-        const div = document.createElement("div");
-        div.className = "item";
-        div.dataset.nome = nome;
-        div.innerHTML = `
-          <img src="${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
-          <span>${nome}</span>
-        `;
-        roleta.appendChild(div);
-      }
-    }
-
-    function getRandomDisponivel() {
-      const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0).map(([nome]) => nome);
-      return disponiveis[Math.floor(Math.random() * disponiveis.length)];
-    }
-
-    function girarRoleta() {
-      if (isSpinning) return;
-      const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0);
-      if (disponiveis.length === 0) {
-        resultado.innerHTML = '<img src="images/todos_sorteados.png" alt="Todos os itens foram sorteados!" style="max-width: 100%; margin-top: 20px;">';
-        return;
-      }
-
-      isSpinning = true;
-      const nomeSorteado = getRandomDisponivel();
-      reconstruirRoleta(nomeSorteado);
-
-      const items = roleta.querySelectorAll(".item");
-      const alvo = items[50];
-      const destino = alvo.offsetLeft;
-
-      roleta.style.transition = "none";
-      roleta.style.transform = "translateX(0)";
-      void roleta.offsetWidth;
-      setTimeout(() => {
-        roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
-        roleta.style.transform = `translateX(-${destino - (roleta.parentElement.offsetWidth / 2) + (itemFullWidth / 2)}px)`;
-        iniciarTickDuranteGiro(12000);
-      });
-
-      setTimeout(() => {
-        items.forEach(i => i.classList.remove("highlight"));
-        alvo.classList.add("highlight");
-        resultado.textContent = `🎯 Item sorteado será: ${nomeSorteado}`;
-        itens[nomeSorteado] = 0;
-        salvarItens(itens);
-        atualizarTabela();
-        isSpinning = false;
-
-        if (nomeSorteado === "AWP Dragon Lore") {
-          dloreSound.play();
+        function carregarItens() {
+            const salvo = localStorage.getItem("itensRoleta");
+            return salvo ? JSON.parse(salvo) : Object.fromEntries(itensBase.map(i => [i, 1]));
         }
 
-      }, 12200);
-    }
+        function salvarItens(itens) {
+            localStorage.setItem("itensRoleta", JSON.stringify(itens));
+        }
 
-    function iniciarTickDuranteGiro(duracaoTotal) {
-      let lastX = null, lastTickTime = 0, lastHighlightIndex = -1;
-      const tickMin = 30, tickMax = 250;
-      const startTime = performance.now();
-      const center = roleta.parentElement.offsetWidth / 2;
-
-      function loop(now) {
-        const elapsed = now - startTime;
-        if (elapsed >= duracaoTotal - 500) return;
-        const matrix = new DOMMatrix(getComputedStyle(roleta).transform);
-        const currentX = matrix.m41;
-
-        if (lastX !== null) {
-          const delta = Math.abs(currentX - lastX);
-          const idealInterval = Math.max(tickMin, Math.min(tickMax, 800 / (delta + 0.1)));
-          if (now - lastTickTime > idealInterval) {
-            const visualCenter = Math.abs(currentX) + center;
-            const index = Math.floor(visualCenter / itemFullWidth);
-            if (index !== lastHighlightIndex) {
-              tickSound.pause();
-              tickSound.currentTime = 0;
-              tickSound.play();
-              lastTickTime = now;
-              lastHighlightIndex = index;
+        function confirmarReset() {
+            if (confirm("Você quer mesmo resetar os itens?")) {
+                resetarItens();
             }
-          }
         }
 
-        lastX = currentX;
-        requestAnimationFrame(loop);
-      }
-      requestAnimationFrame(loop);
-    }
+        function resetarItens() {
+            localStorage.removeItem("itensRoleta");
+            itens = carregarItens();
+            atualizarTabela();
+            reconstruirRoleta();
+            resultado.textContent = "";
+            botaoPreview.style.display = 'none'; // Esconde o botão ao resetar
+        }
 
-    atualizarTabela();
-    reconstruirRoleta(getRandomDisponivel());
-  </script>
+        let itens = carregarItens();
+
+        function atualizarTabela() {
+            tabela.innerHTML = "";
+            for (const [nome, qtd] of Object.entries(itens)) {
+                const tr = document.createElement("tr");
+                tr.className = qtd > 0 ? "disponivel" : "sorteado";
+                tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "Não sorteado" : "Sorteado"}</td>`;
+                tabela.appendChild(tr);
+            }
+        }
+
+        function reconstruirRoleta(nomeSorteado) {
+            roleta.innerHTML = "";
+            for (let i = 0; i < 100; i++) {
+                const nome = (i === 50) ? nomeSorteado : getRandomDisponivel();
+                const div = document.createElement("div");
+                div.className = "item";
+                div.dataset.nome = nome;
+                div.innerHTML = `
+                    <img src="${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
+                    <span>${nome}</span>
+                `;
+                roleta.appendChild(div);
+            }
+        }
+
+        function getRandomDisponivel() {
+            const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0).map(([nome]) => nome);
+            return disponiveis[Math.floor(Math.random() * disponiveis.length)];
+        }
+
+        function girarRoleta() {
+            if (isSpinning) return;
+            const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0);
+            if (disponiveis.length === 0) {
+                resultado.innerHTML = '<img src="images/todos_sorteados.png" alt="Todos os itens foram sorteados!" style="max-width: 100%; margin-top: 20px;">';
+                return;
+            }
+
+            isSpinning = true;
+            botaoPreview.style.display = 'none'; // Esconde o botão ao iniciar o giro
+            const nomeSorteado = getRandomDisponivel();
+            reconstruirRoleta(nomeSorteado);
+
+            const items = roleta.querySelectorAll(".item");
+            const alvo = items[50];
+            const destino = alvo.offsetLeft;
+
+            roleta.style.transition = "none";
+            roleta.style.transform = "translateX(0)";
+            void roleta.offsetWidth;
+            setTimeout(() => {
+                roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
+                roleta.style.transform = `translateX(-${destino - (roleta.parentElement.offsetWidth / 2) + (itemFullWidth / 2)}px)`;
+                iniciarTickDuranteGiro(12000);
+            });
+
+            setTimeout(() => {
+                items.forEach(i => i.classList.remove("highlight"));
+                alvo.classList.add("highlight");
+                resultado.textContent = `🎯 Item sorteado será: ${nomeSorteado}`;
+                itens[nomeSorteado] = 0;
+                salvarItens(itens);
+                atualizarTabela();
+                isSpinning = false;
+                lastSortedItem = nomeSorteado; // Salva o item sorteado
+
+                if (nomeSorteado === "AWP Dragon Lore") {
+                    dloreSound.play();
+                }
+
+                // Exibe o botão de preview se houver um link disponível
+                if (previewLinks[lastSortedItem]) {
+                    botaoPreview.style.display = 'inline-block';
+                }
+
+            }, 12200);
+        }
+
+        function iniciarTickDuranteGiro(duracaoTotal) {
+            let lastX = null, lastTickTime = 0, lastHighlightIndex = -1;
+            const tickMin = 30, tickMax = 250;
+            const startTime = performance.now();
+            const center = roleta.parentElement.offsetWidth / 2;
+
+            function loop(now) {
+                const elapsed = now - startTime;
+                if (elapsed >= duracaoTotal - 500) return;
+                const matrix = new DOMMatrix(getComputedStyle(roleta).transform);
+                const currentX = matrix.m41;
+
+                if (lastX !== null) {
+                    const delta = Math.abs(currentX - lastX);
+                    const idealInterval = Math.max(tickMin, Math.min(tickMax, 800 / (delta + 0.1)));
+                    if (now - lastTickTime > idealInterval) {
+                        const visualCenter = Math.abs(currentX) + center;
+                        const index = Math.floor(visualCenter / itemFullWidth);
+                        if (index !== lastHighlightIndex) {
+                            tickSound.pause();
+                            tickSound.currentTime = 0;
+                            tickSound.play();
+                            lastTickTime = now;
+                            lastHighlightIndex = index;
+                        }
+                    }
+                }
+
+                lastX = currentX;
+                requestAnimationFrame(loop);
+            }
+            requestAnimationFrame(loop);
+        }
+
+        // Adiciona um listener de clique ao botão de preview
+        botaoPreview.addEventListener('click', () => {
+             if (lastSortedItem && previewLinks[lastSortedItem]) {
+        // Abre o link em uma nova guia
+                window.open(previewLinks[lastSortedItem], '_blank');
+            }
+        });
+
+        atualizarTabela();
+        reconstruirRoleta(getRandomDisponivel());
+    </script>
 </body>
 </html>
