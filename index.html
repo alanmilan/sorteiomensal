@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Roleta do Sorteio Mensal</title>
+  <style>
+    body {
+      background: #1f222b;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-canto {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 100px;
+    }
+
+    .banner-topo {
+      width: 100%;
+      max-width: 920px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .roleta-container {
+      width: 900px;
+      margin: 0 auto 10px;
+      overflow: hidden;
+      border: 3px solid #444;
+      border-radius: 15px;
+      background: #1e1e2f;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .roleta {
+      display: flex;
+      transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(0);
+    }
+
+    .item {
+      min-width: 180px;
+      height: 180px;
+      margin: 0 10px;
+      background: #2a2f45;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      font-size: 14px;
+      text-align: center;
+      padding: 10px;
+      color: #fff;
+    }
+
+    .item.highlight {
+      background: #1eaf4d;
+      box-shadow: 0 0 25px #00ff99, inset 0 0 10px white;
+      transform: scale(1.1);
+    }
+
+    .roleta-pointer {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 30px solid #ffcc00;
+      z-index: 10;
+    }
+
+    .botoes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    #botaoGirar {
+      padding: 12px 30px;
+      font-size: 16px;
+      background: #00c97b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #botaoGirar:hover {
+      background: #00e08c;
+    }
+
+    #botaoReset {
+      padding: 6px 15px;
+      font-size: 13px;
+      background: #d62828;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #botaoReset:hover {
+      background: #e63946;
+    }
+
+    #resultado {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #00ffcc;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto 0;
+      background: #111826;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background: #222c3c;
+      color: white;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="images/saullologo.png" alt="Logo" class="logo-canto">
+  <img src="images/banner.png" alt="Banner" class="banner-topo">
+
+  <div class="roleta-container">
+    <div class="roleta" id="roleta"></div>
+    <div class="roleta-pointer"></div>
+  </div>
+
+  <h2 id="resultado"></h2>
+
+  <div class="botoes">
+    <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>
+    <button id="botaoReset" onclick="confirmarReset()">Resetar Itens</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Status</th></tr>
+    </thead>
+    <tbody id="tabelaItens"></tbody>
+  </table>
+
+  <audio id="tickSound" src="tick_sound.mp3" preload="auto"></audio>
+
+  <footer>
+    Feito por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
+  </footer>
+
+  <script>
+    const itensBase = [
+      "★ Shadow Dagger Tiger Tooth", "★ Ursus Tiger Tooth", "★ Butterfly Tiger Tooth", "★ Karambit Tiger Tooth", "★ Survival Tiger Tooth",
+      "★ Talon Tiger Tooth", "★ Navaja Tiger Tooth", "★ Flip Tiger Tooth", "★ Falchion Tiger Tooth", "★ Bayonet Tiger Tooth",
+      "★ M9 Tiger Tooth", "AWP Gungnir", "★ Nomad Tiger Tooth","★ Specialist Gloves - Omega",
+      "★ Bowie Tiger Tooth", "★ Gut Tiger Tooth", "★ Stiletto Tiger Tooth", "★ Huntsman Tiger Tooth", "★ Skeleton Tiger Tooth", "★ Paracord Tiger Tooth"
+    ];
+
+    const imagens = {
+      "★ Shadow Dagger Tiger Tooth": "images/shadow.png",
+      "★ Ursus Tiger Tooth": "images/ursus.png",
+      "★ Butterfly Tiger Tooth": "images/butterfly.png",
+      "★ Karambit Tiger Tooth": "images/karambit.png",
+      "★ Survival Tiger Tooth": "images/survival.png",
+      "★ Talon Tiger Tooth": "images/talon.png",
+      "★ Navaja Tiger Tooth": "images/navaja.png",
+      "★ Flip Tiger Tooth": "images/flip.png",
+      "★ Falchion Tiger Tooth": "images/falchion.png",
+      "★ Bayonet Tiger Tooth": "images/bayonet.png",
+      "★ M9 Tiger Tooth": "images/m9.png",
+      "★ Specialist Gloves - Omega": "images/omega.png",
+      "AWP Gungnir": "images/gungnir.png",      
+      "★ Nomad Tiger Tooth": "images/nomad.png",
+      "★ Bowie Tiger Tooth": "images/bowie.png",
+      "★ Gut Tiger Tooth": "images/gut.png",
+      "★ Stiletto Tiger Tooth": "images/stiletto.png",
+      "★ Huntsman Tiger Tooth": "images/huntsman.png",
+      "★ Skeleton Tiger Tooth": "images/skeleton.png",
+      "★ Paracord Tiger Tooth": "images/paracord.png"
+    };
+
+    const roleta = document.getElementById("roleta");
+    const tabela = document.getElementById("tabelaItens");
+    const resultado = document.getElementById("resultado");
+    const tickSound = document.getElementById("tickSound");
+    const itemFullWidth = 200;
+    let isSpinning = false;
+
+    function carregarItens() {
+      const salvo = localStorage.getItem("itensRoleta");
+      return salvo ? JSON.parse(salvo) : Object.fromEntries(itensBase.map(i => [i, 1]));
+    }
+
+    function salvarItens(itens) {
+      localStorage.setItem("itensRoleta", JSON.stringify(itens));
+    }
+
+    function confirmarReset() {
+      if (confirm("Você quer mesmo resetar os itens?")) {
+        resetarItens();
+      }
+    }
+
+    function resetarItens() {
+      localStorage.removeItem("itensRoleta");
+      itens = carregarItens();
+      atualizarTabela();
+      reconstruirRoleta();
+      resultado.textContent = "";
+    }
+
+    let itens = carregarItens();
+
+    function atualizarTabela() {
+      tabela.innerHTML = "";
+      for (const [nome, qtd] of Object.entries(itens)) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "Disponível" : "Sorteado"}</td>`;
+        tabela.appendChild(tr);
+      }
+    }
+
+    function reconstruirRoleta(nomeSorteado) {
+      roleta.innerHTML = "";
+      for (let i = 0; i < 100; i++) {
+        const nome = (i === 50) ? nomeSorteado : getRandomDisponivel();
+        const div = document.createElement("div");
+        div.className = "item";
+        div.dataset.nome = nome;
+        div.innerHTML = `
+          <img src="${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
+          <span>${nome}</span>
+        `;
+        roleta.appendChild(div);
+      }
+    }
+
+    function getRandomDisponivel() {
+      const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0).map(([nome]) => nome);
+      return disponiveis[Math.floor(Math.random() * disponiveis.length)];
+    }
+
+    function girarRoleta() {
+      if (isSpinning) return;
+      const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0);
+      if (disponiveis.length === 0) {
+        resultado.innerHTML = '<img src="images/todos_sorteados.png" alt="Todos os itens foram sorteados!" style="max-width: 100%; margin-top: 20px;">';
+        return;
+      }
+
+      isSpinning = true;
+      const nomeSorteado = getRandomDisponivel();
+      reconstruirRoleta(nomeSorteado);
+
+      const items = roleta.querySelectorAll(".item");
+      const alvo = items[50];
+      const destino = alvo.offsetLeft;
+
+      roleta.style.transition = "none";
+      roleta.style.transform = "translateX(0)";
+      void roleta.offsetWidth;
+      setTimeout(() => {
+        roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
+        roleta.style.transform = `translateX(-${destino - (roleta.parentElement.offsetWidth / 2) + (itemFullWidth / 2)}px)`;
+        iniciarTickDuranteGiro(12000);
+      });
+
+      setTimeout(() => {
+        items.forEach(i => i.classList.remove("highlight"));
+        alvo.classList.add("highlight");
+        resultado.textContent = `🎯 Item sorteado será: ${nomeSorteado}`;
+        itens[nomeSorteado] = 0;
+        salvarItens(itens);
+        atualizarTabela();
+        isSpinning = false;
+      }, 12200);
+    }
+
+    function iniciarTickDuranteGiro(duracaoTotal) {
+      let lastX = null, lastTickTime = 0, lastHighlightIndex = -1;
+      const tickMin = 30, tickMax = 250;
+      const startTime = performance.now();
+      const center = roleta.parentElement.offsetWidth / 2;
+
+      function loop(now) {
+        const elapsed = now - startTime;
+        if (elapsed >= duracaoTotal - 500) return;
+        const matrix = new DOMMatrix(getComputedStyle(roleta).transform);
+        const currentX = matrix.m41;
+
+        if (lastX !== null) {
+          const delta = Math.abs(currentX - lastX);
+          const idealInterval = Math.max(tickMin, Math.min(tickMax, 800 / (delta + 0.1)));
+          if (now - lastTickTime > idealInterval) {
+            const visualCenter = Math.abs(currentX) + center;
+            const index = Math.floor(visualCenter / itemFullWidth);
+            if (index !== lastHighlightIndex) {
+              tickSound.pause();
+              tickSound.currentTime = 0;
+              tickSound.play();
+              lastTickTime = now;
+              lastHighlightIndex = index;
+            }
+          }
+        }
+
+        lastX = currentX;
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    atualizarTabela();
+    reconstruirRoleta(getRandomDisponivel());
+  </script>
+</body>
+</html>
