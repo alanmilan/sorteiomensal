@@ -6,11 +6,8 @@
     <style>
         body { 
             background: 
-            linear-gradient(135deg, rgba(0,255,100,0.4) 0%, rgba(0,0,0,0) 50%),
-            linear-gradient(45deg, rgba(0,200,255,0.4) 0%, rgba(0,0,0,0) 50%),
-            linear-gradient(225deg, rgba(50,255,150,0.4) 0%, rgba(0,0,0,0) 50%),
-            linear-gradient(315deg, rgba(0,150,255,0.4) 0%, rgba(0,0,0,0) 50%),
-             #1f222b;
+            radial-gradient(circle at center, rgba(0, 201, 255, 0.4) 0%, rgba(0, 0, 0, 0) 50%),
+            #1f222b;
             background-blend-mode:overlay;
             color: white;
             font-family: Arial, sans-serif;
@@ -226,59 +223,56 @@
 
     <script>
         const itensBase = [
-            "★ Shadow Dagger Gamma Doppler", "★ Shadow Dagger Gamma Doppler(2)", "★ Butterfly Gamma Doppler", "★ Karambit Gamma Doppler", "★ Flip Gamma Doppler", "★ Falchion Gamma Doppler", "★ Bayonet Gamma Doppler",
-            "★ M9 Gamma Doppler", "AWP Dragon Lore","★ Huntsman Gamma Doppler", "★ Hand Wraps Caution",
-            "★ Bowie Gamma Doppler","★ Bowie Gamma Doppler(2)", "★ Gut Gamma Doppler", "★ Gut Gamma Doppler(2)", "Glock Gamma Doppler", "Glock Gamma Doppler(2)", "★ Hand Wraps Overprint", "★ MotorGloves Turtle", "★ Broken Fang Gloves Jade",
+            "Luvas Esportivas (★) | Caixa de Pandora", "Canivete Borboleta (★) | Doppler", "Karambit (★ StatTrak™) | Doppler", "Baioneta M9 (★ StatTrak™) | Doppler", "Faca Talon (★ StatTrak™) | Doppler", "Faca Esqueleto (★ StatTrak™) | Doppler", "Faca Nômade (★) | Doppler",
+            "Faca Stiletto (★ StatTrak™) | Doppler", "Baioneta (★) | Doppler", "Canivete (★) | Doppler",
+            "Faca do Caçador (★) | Doppler","Canivete Falchion (★) | Doppler", "Faca Bowie (★) | Doppler", "Faca de Cordame (★ StatTrak™) | Doppler", "Faca Ursus (★) | Doppler", "Faca de Sobrevivência (★) | Doppler", "Adagas Sombrias (★) | Doppler", "Faca Gut Hook (★) | Doppler", "Faca Navaja (★) | Doppler",
         ];
 
         const imagens = {
-            "★ Shadow Dagger Gamma Doppler": "images/shadow.png",
-            "★ Shadow Dagger Gamma Doppler(2)": "images/shadow.png", 
-            "★ Butterfly Gamma Doppler": "images/butterfly.png",
-            "★ Karambit Gamma Doppler": "images/karambit.png", 
-            "★ Flip Gamma Doppler": "images/flip.png",
-            "★ Falchion Gamma Doppler": "images/falchion.png",
-            "★ Bayonet Gamma Doppler": "images/bayonet.png",
-            "★ Huntsman Gamma Doppler": "images/huntsman.png",
-            "★ M9 Gamma Doppler": "images/m9.png",
-            "★ Hand Wraps Caution": "images/caution.png",
-            "AWP Dragon Lore": "images/lore.png", 
-            "★ Bowie Gamma Doppler": "images/bowie.png",
-            "★ Bowie Gamma Doppler(2)": "images/bowie.png",
-            "★ Gut Gamma Doppler": "images/gut.png",
-            "★ Gut Gamma Doppler(2)": "images/gut.png",
-            "Glock Gamma Doppler": "images/glock.png",
-            "Glock Gamma Doppler(2)": "images/glock.png",
-            "★ Huntsman Gamma Doppler": "images/huntsman.png",
-            "★ Hand Wraps Overprint": "images/overprint.png",
-            "★ Broken Fang Gloves Jade": "images/jade.png",
-            "★ MotorGloves Turtle": "images/turtle.png"
+            "Luvas Esportivas (★) | Caixa de Pandora": "images/pandora.png",
+            "Canivete Borboleta (★) | Doppler": "images/butterfly.png", 
+            "Karambit (★ StatTrak™) | Doppler": "images/karambit.png",
+            "Baioneta M9 (★ StatTrak™) | Doppler": "images/m9.png", 
+            "Faca Talon (★ StatTrak™) | Doppler": "images/talon.png",
+            "Faca Esqueleto (★ StatTrak™) | Doppler": "images/skeleton.png",
+            "Faca Nômade (★) | Doppler": "images/nomad.png",
+            "Faca Stiletto (★ StatTrak™) | Doppler": "images/stilleto.png",
+            "Baioneta (★) | Doppler": "images/bayonet.png",
+            "Canivete (★) | Doppler": "images/flip.png",
+            "Faca do Caçador (★) | Doppler": "images/huntsman.png", 
+            "Canivete Falchion (★) | Doppler": "images/falchion.png",
+            "Faca Bowie (★) | Doppler": "images/bowie.png",
+            "Faca de Cordame (★ StatTrak™) | Doppler": "images/paracord.png",
+            "Faca Ursus (★) | Doppler": "images/ursus.png",
+            "Faca de Sobrevivência (★) | Doppler": "images/survival.png",
+            "Adagas Sombrias (★) | Doppler": "images/shadow.png",
+            "Faca Gut Hook (★) | Doppler": "images/gut.png",
+            "Faca Navaja (★) | Doppler": "images/navaja.png",
         };
         
         // Dicionário com os links de preview
         // Note: You must replace these with the correct preview links for each item.
         // The one for AWP Dragon Lore is provided as an example.
         const previewLinks = {
-            "AWP Dragon Lore": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44971908744D5505897430664803501",
-            "★ Shadow Dagger Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44951288168D7406919660377001228",
-            "★ Shadow Dagger Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020507034D3332675066730825576",
-            "★ Butterfly Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45004817448D12432299293694780977",
-            "★ Karambit Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45006424255D17205448949357566513",
-            "★ Flip Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44972133607D9404754678570262081",
-            "★ Falchion Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45462522208D344184750001155244",
-            "★ Bayonet Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44972060714D14719113968133712360",
-            "★ Huntsman Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45462537569D7928211983792985985",
-            "★ M9 Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A44951217436D4784582742738156452",
-            "★ Hand Wraps Caution": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020582387D14412555179749867008",
-            "★ Bowie Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020378913D778601912978416732",
-            "★ Bowie Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020378913D778601912978416732",
-            "★ Gut Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020524310D7396788561268946516",
-            "★ Gut Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020524310D7396788561268946516",
-            "Glock Gamma Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020545710D4921428090481422272",
-            "Glock Gamma Doppler(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45020489561D7974342661140311460",
-            "★ Hand Wraps Overprint": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45023385033D2363031218579224140",
-            "★ Broken Fang Gloves Jade": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45023435069D11972749491598125933",
-            "★ MotorGloves Turtle": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45023404666D14873640072767665857",
+            "Luvas Esportivas (★) | Caixa de Pandora": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209348D14889760303197987192",
+            "Canivete Borboleta (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209389D5215280737428833493",
+            "Karambit (★ StatTrak™) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209416D7839782096749715029",
+            "Baioneta M9 (★ StatTrak™) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209424D146383382112893832",
+            "Faca Esqueleto (★ StatTrak™) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209447D3317647353145644013",
+            "Faca Nômade (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209370D12271194320317226053",
+            "Faca Stiletto (★ StatTrak™) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209476D9693620036354612244",
+            "Baioneta (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209464D14179201369427755336",
+            "Canivete (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209484D9578251147886173281",
+            "Faca do Caçador (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209493D16451200991914187529",
+            "Canivete Falchion (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209501D14854787326265278560",
+            "Faca Bowie (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209512D7953603576350826580",
+            "Faca de Cordame (★ StatTrak™) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209523D5352603972071646629",
+            "Faca Ursus (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209535D16332344172415863253",
+            "Faca de Sobrevivência (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209607D12250363636685514652",
+            "Adagas Sombrias (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209550D3345304057432248196",
+            "Faca Gut Hook (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209624D11731501596874372216",
+            "Faca Navaja (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209634D9574838208280179200",
+            "Faca Talon (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209437D16180534597206282417",
 
 
             
@@ -445,4 +439,5 @@
     </script>
 </body>
 </html>
+
 
