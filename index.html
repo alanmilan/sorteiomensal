@@ -4,18 +4,17 @@
     <meta charset="UTF-8" />
     <title>Roleta do Sorteio Mensal</title>
     <style>
-        body { 
-            background: 
-            radial-gradient(circle at center, rgba(0, 201, 255, 0.4) 0%, rgba(0, 0, 0, 0) 50%),
-            #1f222b;
-            background-blend-mode:overlay;
-            color: white;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        body { 
+            background: linear-gradient(135deg, #4c68d7 0%, #a765e6 100%); /* Azul para Roxo */
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Adicionado para garantir que o gradiente cubra toda a altura */
+            margin: 0; /* Remove margem padrão do body */
+        }
 
         .logo-canto {
             position: absolute;
@@ -439,6 +438,7 @@
     </script>
 </body>
 </html>
+
 
 
 
