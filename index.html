@@ -6,8 +6,8 @@
     <style>
         body { 
             background: 
-            linear-gradient(135deg, #1A1245 0%, #150E38 100%);
-            #1f222b;
+            linear-gradient(135deg, #0829c4 0%, #8b075b 100%);
+            
             background-blend-mode:overlay;
             color: white;
             font-family: Arial, sans-serif;
@@ -38,7 +38,7 @@
             overflow: hidden;
             border: 3px solid #444;
             border-radius: 15px;
-            background: #9409e1;
+            background: #59535e;
             position: relative;
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
@@ -68,7 +68,7 @@
         }
 
         .item.highlight {
-            background: #9409e1;
+            background: #cd058d;
             box-shadow: 0 0 25px #00ff99, inset 0 0 10px white;
             transform: scale(1.1);
         }
@@ -97,7 +97,7 @@
         #botaoGirar {
             padding: 12px 30px;
             font-size: 16px;
-            background: #9409e1;
+            background: #bc0f8b;
             color: white;
             border: none;
             border-radius: 6px;
@@ -128,7 +128,7 @@
             color: #00ffcc;
         }
 
-        /* Novo estilo para o botão de preview */
+        
         #botaoPreview {
             padding: 10px 20px;
             font-size: 15px;
@@ -149,7 +149,7 @@
             width: 100%;
             max-width: 900px;
             margin: 20px auto 0;
-            background: #111826;
+            background: #111126;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -163,18 +163,18 @@
         }
 
         th {
-            background: #222c3c;
+            background: #3c3822;
             color: white;
         }
 
         tr.disponivel td {
-            background-color: #0b1232; /* vermelho escuro */
+            background: linear-gradient(135deg, #0829c4 0%, #8b075b 100%); /* vermelho escuro */
             color: white;
             font-weight: bold;
         }
 
         tr.sorteado td {
-            background-color: #9409e1; /* verde */
+            background-color: #8b075b; /* verde */
             color: white;
             font-weight: bold;
         }
@@ -223,36 +223,35 @@
 
     <script>
         const itensBase = [
-            "Luvas Esportivas (★) | Caixa de Pandora", "Canivete Borboleta (★) | Doppler", "Karambit (★ StatTrak™) | Doppler", "Baioneta M9 (★ StatTrak™) | Doppler", "Faca Talon (★ StatTrak™) | Doppler", "Faca Esqueleto (★ StatTrak™) | Doppler", "Faca Nômade (★) | Doppler",
-            "Faca Stiletto (★ StatTrak™) | Doppler", "Baioneta (★) | Doppler", "Canivete (★) | Doppler",
-            "Faca do Caçador (★) | Doppler","Canivete Falchion (★) | Doppler", "Faca Bowie (★) | Doppler", "Faca de Cordame (★ StatTrak™) | Doppler", "Faca Ursus (★) | Doppler", "Faca de Sobrevivência (★) | Doppler", "Adagas Sombrias (★) | Doppler", "Faca Gut Hook (★) | Doppler", "Faca Navaja (★) | Doppler",
+            "AWP Gungnir", "AWP | Degradê 0.0069", "Canivete Borboleta (★ StatTrak™) | Degradê", "Karambit (★ StatTrak™) | Degradê", "Baioneta M9 (★) | Degradê", "Faca Talon (★) | Degradê", "Faca Esqueleto (★) | Degradê",
+            "Faca Nômade (★ StatTrak™) | 98% FADE", "Baioneta (★) | Degradê", "Faca Clássica (★) | Degradê",
+            "Canivete (★ StatTrak™) | Degradê","Faca Kukri (★) | Degradê", "Faca de Sobrevivência (★) | Degradê", "Adagas Sombrias (★) | Degradê", "Adagas Sombrias (★) | Degradê(2)", "Faca Gut Hook (★) | Degradê", "Faca Gut Hook (★) | Degradê(2)", "Faca Navaja (★) | Degradê", "Faca Navaja (★) | Degradê(2)","Luvas de Especialista (★) | Degradê",
         ];
 
         const imagens = {
-            "Luvas Esportivas (★) | Caixa de Pandora": "images/pandora.png",
-            "Canivete Borboleta (★) | Doppler": "images/butterfly.png", 
-            "Karambit (★ StatTrak™) | Doppler": "images/karambit.png",
-            "Baioneta M9 (★ StatTrak™) | Doppler": "images/m9.png", 
-            "Faca Talon (★ StatTrak™) | Doppler": "images/talon.png",
-            "Faca Esqueleto (★ StatTrak™) | Doppler": "images/skeleton.png",
-            "Faca Nômade (★) | Doppler": "images/nomad.png",
-            "Faca Stiletto (★ StatTrak™) | Doppler": "images/stilleto.png",
-            "Baioneta (★) | Doppler": "images/bayonet.png",
-            "Canivete (★) | Doppler": "images/flip.png",
-            "Faca do Caçador (★) | Doppler": "images/huntsman.png", 
-            "Canivete Falchion (★) | Doppler": "images/falchion.png",
-            "Faca Bowie (★) | Doppler": "images/bowie.png",
-            "Faca de Cordame (★ StatTrak™) | Doppler": "images/paracord.png",
-            "Faca Ursus (★) | Doppler": "images/ursus.png",
-            "Faca de Sobrevivência (★) | Doppler": "images/survival.png",
-            "Adagas Sombrias (★) | Doppler": "images/shadow.png",
-            "Faca Gut Hook (★) | Doppler": "images/gut.png",
-            "Faca Navaja (★) | Doppler": "images/navaja.png",
+            "AWP Gungnir": "images/gungnir.png",
+            "AWP | Degradê 0.0069": "images/fade.png", 
+            "Canivete Borboleta (★ StatTrak™) | Degradê": "images/butterfly.png",
+            "Karambit (★ StatTrak™) | Degradê": "images/karambit.png", 
+            "Baioneta M9 (★) | Degradê": "images/m9.png",
+            "Faca Talon (★) | Degradê": "images/talon.png",
+            "Faca Esqueleto (★) | Degradê": "images/skeleton.png",
+            "Faca Nômade (★ StatTrak™) | 98% FADE": "images/nomad.png",
+            "Baioneta (★) | Degradê": "images/bayonet.png",
+            "Faca Clássica (★) | Degradê": "images/classic.png",
+            "Canivete (★ StatTrak™) | Degradê": "images/flip.png", 
+            "Faca Kukri (★) | Degradê": "images/kukri.png",
+            "Faca de Sobrevivência (★) | Degradê": "images/survival.png",
+            "Adagas Sombrias (★) | Degradê": "images/shadow.png",
+            "Adagas Sombrias (★) | Degradê(2)": "images/shadow.png",
+            "Faca Gut Hook (★) | Degradê": "images/gut.png",
+            "Faca Gut Hook (★) | Degradê(2)": "images/gut.png",
+            "Faca Navaja (★) | Degradê": "images/navaja.png",
+            "Faca Navaja (★) | Degradê(2)": "images/navaja.png",
+            "Luvas de Especialista (★) | Degradê": "images/fadeglove.png",
         };
         
-        // Dicionário com os links de preview
-        // Note: You must replace these with the correct preview links for each item.
-        // The one for AWP Dragon Lore is provided as an example.
+
         const previewLinks = {
             "Luvas Esportivas (★) | Caixa de Pandora": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209348D14889760303197987192",
             "Canivete Borboleta (★) | Doppler": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209389D5215280737428833493",
@@ -439,7 +438,6 @@
     </script>
 </body>
 </html>
-
 
 
 
