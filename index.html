@@ -38,7 +38,6 @@
             padding-bottom: 40px;
         }
 
-        /* Container principal para limitar a largura e centralizar */
         .main-wrapper {
             width: 100%;
             max-width: 1000px;
@@ -53,7 +52,7 @@
             width: 80px;
             height: auto;
             align-self: flex-start;
-            margin-bottom: -40px; /* Sobrepor levemente */
+            margin-bottom: -40px;
             z-index: 2;
         }
 
@@ -66,11 +65,11 @@
             object-fit: cover;
         }
 
-        /* --- ROLETA --- */
+        /* --- ROLETA (Tamanho Intermediário) --- */
         .roleta-container {
             width: 100%;
             max-width: 900px;
-            height: 220px; /* Altura fixa */
+            height: 250px; /* Reduzido de 300px para 250px */
             margin: 0 auto 30px;
             overflow: hidden;
             border-radius: 16px;
@@ -78,10 +77,10 @@
             position: relative;
             box-shadow: 0 0 0 4px #2b2d35, 0 20px 50px rgba(0,0,0,0.6);
             display: flex;
-            align-items: center; /* Centralizar itens verticalmente */
+            align-items: center;
         }
 
-        /* Efeito de sombra interna nas laterais para dar profundidade */
+        /* Efeito Fade nas laterais */
         .roleta-container::before, .roleta-container::after {
             content: '';
             position: absolute;
@@ -100,7 +99,6 @@
             background: linear-gradient(to left, var(--bg-panel) 0%, transparent 100%);
         }
 
-        /* Linha central vertical para ajudar na mira (opcional, visual apenas) */
         .linha-central {
             position: absolute;
             left: 50%;
@@ -119,20 +117,19 @@
             transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
             transform: translateX(0);
             will-change: transform;
-    /* padding-left: 50%; REMOVIDO */
         }
 
         .item {
-            width: 180px; /* Largura fixa */
-            height: 160px;
-            margin: 0 8px; /* Espaçamento */
+            width: 200px;  /* Reduzido de 240px para 200px */
+            height: 200px; /* Reduzido de 240px para 200px */
+            margin: 0 10px; 
             background: var(--bg-item);
             border-radius: 12px;
             border-bottom: 3px solid #333;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             flex-shrink: 0;
             padding: 15px 10px;
             transition: all 0.3s ease;
@@ -141,12 +138,13 @@
         
         .item img {
             max-width: 90%;
-            max-height: 90px;
+            max-height: 120px; /* Ajustado para caber no novo card */
             filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+            margin-bottom: 12px;
         }
 
         .item span {
-            font-size: 12px;
+            font-size: 14px; /* Ajuste leve na fonte */
             font-weight: 600;
             color: var(--text-muted);
             text-align: center;
@@ -174,7 +172,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 4px;
-            height: 30px;
+            height: 35px;
             background: var(--accent-gold);
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
@@ -182,7 +180,6 @@
             z-index: 20;
         }
         
-        /* Triângulo do pointer */
         .roleta-pointer::after {
             content: '';
             position: absolute;
@@ -238,10 +235,6 @@
             filter: brightness(1.1);
         }
 
-        #botaoGirar:active {
-            transform: translateY(1px);
-        }
-
         #botaoPreview {
             padding: 14px 30px;
             font-size: 14px;
@@ -288,7 +281,6 @@
             text-align: left;
             border-bottom: 2px solid #2b2d35;
         }
-        
         th:last-child { text-align: right; }
 
         td {
@@ -297,56 +289,34 @@
             color: var(--text-main);
             font-size: 14px;
         }
-        
         td:last-child { text-align: right; }
 
-        /* Status: Disponível */
-        tr.disponivel td {
-            color: #fff;
-        }
-        tr.disponivel td:last-child {
-            color: #4cd964; /* Verde */
-            font-weight: 600;
-        }
+        tr.disponivel td { color: #fff; }
+        tr.disponivel td:last-child { color: #4cd964; font-weight: 600; }
 
-        /* Status: Sorteado */
-        tr.sorteado {
-            background: rgba(230, 57, 70, 0.05);
-        }
-        tr.sorteado td {
-            color: var(--text-muted);
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-        tr.sorteado td:last-child {
-            text-decoration: none;
-            color: var(--primary-red);
-            font-weight: 600;
-        }
+        tr.sorteado { background: rgba(230, 57, 70, 0.05); }
+        tr.sorteado td { color: var(--text-muted); text-decoration: line-through; opacity: 0.6; }
+        tr.sorteado td:last-child { text-decoration: none; color: var(--primary-red); font-weight: 600; }
 
         footer {
             margin-top: 40px;
             font-size: 13px;
             color: #555;
         }
-        footer a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
+        footer a { color: var(--text-muted); text-decoration: none; }
         footer a:hover { color: var(--primary-red); }
 
-        /* Ajuste responsivo */
         @media (max-width: 768px) {
-            .roleta-container { width: 95%; }
-            .item { width: 140px; height: 130px; }
+            .roleta-container { width: 95%; height: 220px; }
+            .item { width: 160px; height: 160px; }
         }
     </style>
 </head>
 <body>
 
     <div class="main-wrapper">
-                <img src="images/banner.png" alt="Banner" class="banner-topo">
+        <img src="images/saullologo.png" alt="Logo" class="logo-canto">
+        <img src="images/banner.png" alt="Banner" class="banner-topo">
 
         <div class="roleta-container">
             <div class="linha-central"></div>
@@ -364,10 +334,7 @@
         <div class="tabela-container">
             <table>
                 <thead>
-                    <tr>
-                        <th>Item (Skin)</th>
-                        <th>Status</th>
-                    </tr>
+                    <tr><th>Item (Skin)</th><th>Status</th></tr>
                 </thead>
                 <tbody id="tabelaItens"></tbody>
             </table>
@@ -447,9 +414,8 @@
         const dloreSound = document.getElementById("dloreSound");
         const botaoPreview = document.getElementById("botaoPreview");
         
-        // Ajustei o itemFullWidth para bater com o CSS (180px largura + 16px margem total = ~196)
-        // Para garantir precisão, usamos getBoundingClientRect na lógica, mas aqui é valor base.
-        const itemFullWidth = 196; 
+        // AJUSTADO: 200px largura + 20px de margem (10 de cada lado) = 220px
+        const itemFullWidth = 220; 
         
         let isSpinning = false;
         let lastSortedItem = null;
@@ -485,7 +451,6 @@
             for (const [nome, qtd] of Object.entries(itens)) {
                 const tr = document.createElement("tr");
                 tr.className = qtd > 0 ? "disponivel" : "sorteado";
-                // Modifiquei levemente o texto para ficar mais "clean"
                 tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "DISPONÍVEL" : "SORTEADO"}</td>`;
                 tabela.appendChild(tr);
             }
@@ -508,7 +473,6 @@
 
         function getRandomDisponivel() {
             const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0).map(([nome]) => nome);
-            // Fallback se não tiver itens disponíveis (apenas visual)
             if (disponiveis.length === 0) return Object.keys(itens)[0];
             return disponiveis[Math.floor(Math.random() * disponiveis.length)];
         }
@@ -526,27 +490,21 @@
             const nomeSorteado = getRandomDisponivel();
             reconstruirRoleta(nomeSorteado);
 
-            // Pequeno delay para garantir renderização antes do cálculo
             setTimeout(() => {
                 const items = roleta.querySelectorAll(".item");
                 const alvo = items[50];
                 
-                // Cálculo preciso baseado no offset real
                 const containerCenter = roleta.parentElement.offsetWidth / 2;
                 const alvoCenter = alvo.offsetLeft + (alvo.offsetWidth / 2);
                 const deslocamento = alvoCenter - containerCenter;
 
-                // Força reset da posição
                 roleta.style.transition = "none";
                 roleta.style.transform = "translateX(0)";
                 
-                // Força reflow
                 void roleta.offsetWidth;
 
-                // Inicia animação
                 requestAnimationFrame(() => {
                     roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
-                    // Adiciona um pequeno valor randomico (-10 a +10px) para não cair sempre pixel-perfect no meio
                     const randomOffset = Math.floor(Math.random() * 20) - 10;
                     roleta.style.transform = `translateX(-${deslocamento + randomOffset}px)`;
                     iniciarTickDuranteGiro(12000);
@@ -576,11 +534,9 @@
 
         function iniciarTickDuranteGiro(duracaoTotal) {
             let lastX = null, lastTickTime = 0, lastHighlightIndex = -1;
-            const tickMin = 50, tickMax = 300; // Ajustei levemente os ticks para ficar menos barulhento
             const startTime = performance.now();
             const center = roleta.parentElement.offsetWidth / 2;
-            // Largura real do item incluindo margem
-            const realItemWidth = 196; 
+            const realItemWidth = 220; // Atualizado para o novo tamanho
 
             function loop(now) {
                 const elapsed = now - startTime;
@@ -591,15 +547,13 @@
 
                 if (lastX !== null) {
                     const delta = Math.abs(currentX - lastX);
-                    // Lógica para tocar som
                     const visualPos = Math.abs(currentX) + center;
                     const index = Math.floor(visualPos / realItemWidth);
 
                     if (index !== lastHighlightIndex && delta > 0.5) {
-                         // Evita spam de som muito rápido no início
                         if (now - lastTickTime > 40) {
                             const clone = tickSound.cloneNode();
-                            clone.volume = 0.5; // Volume mais baixo
+                            clone.volume = 0.5;
                             clone.play().catch(e => {});
                             lastTickTime = now;
                             lastHighlightIndex = index;
