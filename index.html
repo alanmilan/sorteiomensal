@@ -69,7 +69,7 @@
         .roleta-container {
             width: 100%;
             max-width: 900px;
-            height: 250px; /* Reduzido de 300px para 250px */
+            height: 250px;
             margin: 0 auto 30px;
             overflow: hidden;
             border-radius: 16px;
@@ -120,8 +120,8 @@
         }
 
         .item {
-            width: 200px;  /* Reduzido de 240px para 200px */
-            height: 200px; /* Reduzido de 240px para 200px */
+            width: 200px;
+            height: 200px;
             margin: 0 10px; 
             background: var(--bg-item);
             border-radius: 12px;
@@ -138,13 +138,13 @@
         
         .item img {
             max-width: 90%;
-            max-height: 120px; /* Ajustado para caber no novo card */
+            max-height: 120px;
             filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
             margin-bottom: 12px;
         }
 
         .item span {
-            font-size: 14px; /* Ajuste leve na fonte */
+            font-size: 14px;
             font-weight: 600;
             color: var(--text-muted);
             text-align: center;
@@ -386,25 +386,31 @@
             "Faixas (★) | Abate": "images/faixas.png",
         };
         
+        // ATENÇÃO: Substitua "INSIRA_SEU_LINK_AQUI" pelos links de inspeção reais de cada skin no seu inventário!
         const previewLinks = {
-            "AWP Gungnir": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209559D12305145224011234949",
-            "AWP | Degradê 0.0069": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561199503768916A45874153903D5477167310815278789",
-            "Canivete Borboleta (★ StatTrak™) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209645D864809962364004057",
-            "Karambit (★ StatTrak™) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209744D2648686959923368125",
-            "Baioneta M9 (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209757D14268149934992088516",
-            "Faca Talon (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209694D14160634797292060373",
-            "Faca Esqueleto (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209357D14160443921968676805",
-            "Faca Nômade (★ StatTrak™) | 98% FADE": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209690D640820365966201953",
-            "Baioneta (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209700D16429871339427423212",
-            "Faca Clássica (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209714D4784633356150730105",
-            "Canivete (★ StatTrak™) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209730D9398040647848506413",
-            "Faca Kukri (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209738D7945067019641600312",
-            "Adagas Sombrias (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209720D4782935455904195428",
-            "Adagas Sombrias (★) | Degradê(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209720D4782935455904195428",
-            "Faca Gut Hook (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209704D14449836959064912636",
-            "Faca Gut Hook (★) | Degradê(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209704D14449836959064912636",
-            "Faca Navaja (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209709D11529890904821208076",
-            "Faca Navaja (★) | Degradê(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209709D11529890904821208076",
+            "M4A4 | Uivo": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209559D12305145224011234949",
+            "M4A1-S | Arma Esportiva 0.009": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561199503768916A45874153903D5477167310815278789",
+            "MP9 | Arma Esportiva": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46754420213D3027767407842223260",
+            "Canivete Borboleta (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46654375222D7227411084681579121",
+            "Karambit (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46654459291D11970577335080834617",
+            "Baioneta M9 (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46654548407D14738633154572448652",
+            "Faca Talon (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45625247123D354736384190076569",
+            "Faca Esqueleto (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A48092952706D3316552146181053761",
+            "Faca Stiletto (★ StatTrak™) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46657454567D7954142778889212016",
+            "Baioneta (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752320044D3071638217783075116",
+            "Faca Nômade (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752368515D10298266503554013925",
+            "Canivete (★ StatTrak™) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752441930D1066832544459757769",
+            "Faca Bowie (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752515630D7974890440166262292",
+            "Faca Clássica (★ StatTrak™) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752591222D11549481413294131601",
+            "Faca do Caçador (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752650640D10090957139869127109",
+            "Faca Kukri (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752755460D12604526641470249460",
+            "Faca Ursus (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752830031D13902201504177891289",
+            "Canivete Falchion (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46762831060D5683622978058610316",
+            "Faca de Sobrevivência (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46763233419D11684280100999965656",
+            "Faca Gut Hook (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46761360652D7091024178840040664",
+            "Adagas Sombrias (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46763276524D63875509719459652",
+            "Faca Navaja (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46763371364D9954858278780050016",
+            "Faixas (★) | Abate": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46754510587D10134764327754677376"
         };
 
         const roleta = document.getElementById("roleta");
@@ -414,7 +420,6 @@
         const dloreSound = document.getElementById("dloreSound");
         const botaoPreview = document.getElementById("botaoPreview");
         
-        // AJUSTADO: 200px largura + 20px de margem (10 de cada lado) = 220px
         const itemFullWidth = 220; 
         
         let isSpinning = false;
@@ -536,7 +541,7 @@
             let lastX = null, lastTickTime = 0, lastHighlightIndex = -1;
             const startTime = performance.now();
             const center = roleta.parentElement.offsetWidth / 2;
-            const realItemWidth = 220; // Atualizado para o novo tamanho
+            const realItemWidth = 220; 
 
             function loop(now) {
                 const elapsed = now - startTime;
