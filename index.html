@@ -518,7 +518,7 @@
                 setTimeout(() => {
                     items.forEach(i => i.classList.remove("highlight"));
                     alvo.classList.add("highlight");
-                    resultado.textContent = `🎉 ${nomeSorteado}`;
+                    resultado.textContent = `O item sorteado será: ${nomeSorteado}`;
                     itens[nomeSorteado] = 0;
                     salvarItens(itens);
                     atualizarTabela();
@@ -583,3 +583,4 @@
     </script>
 </body>
 </html>
+
