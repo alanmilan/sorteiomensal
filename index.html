@@ -2,244 +2,388 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roleta do Sorteio Mensal</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --primary-red: #e63946;
+            --primary-dark: #9d0208;
+            --accent-gold: #ffb703;
+            --bg-dark: #0f1014;
+            --bg-panel: #1b1d24;
+            --bg-item: #252830;
+            --text-main: #edf2f4;
+            --text-muted: #8d99ae;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body { 
-            background: 
-            linear-gradient(135deg, #111011 0%, #c20600 100%);
-            
-            background-blend-mode:overlay;
-            color: white;
-            font-family: Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* Container principal para limitar a largura e centralizar */
+        .main-wrapper {
+            width: 100%;
+            max-width: 1000px;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
 
         .logo-canto {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            width: 100px;
+            width: 80px;
+            height: auto;
+            align-self: flex-start;
+            margin-bottom: -40px; /* Sobrepor levemente */
+            z-index: 2;
         }
 
         .banner-topo {
             width: 100%;
-            max-width: 920px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 20px 0 40px;
+            object-fit: cover;
         }
 
+        /* --- ROLETA --- */
         .roleta-container {
-            width: 900px;
-            margin: 0 auto 10px;
+            width: 100%;
+            max-width: 900px;
+            height: 220px; /* Altura fixa */
+            margin: 0 auto 30px;
             overflow: hidden;
-            border: 3px solid #444;
-            border-radius: 15px;
-            background: #c20600;
+            border-radius: 16px;
+            background: var(--bg-panel);
             position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            box-shadow: 0 0 0 4px #2b2d35, 0 20px 50px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center; /* Centralizar itens verticalmente */
+        }
+
+        /* Efeito de sombra interna nas laterais para dar profundidade */
+        .roleta-container::before, .roleta-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 150px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .roleta-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-panel) 0%, transparent 100%);
+        }
+        .roleta-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-panel) 0%, transparent 100%);
+        }
+
+        /* Linha central vertical para ajudar na mira (opcional, visual apenas) */
+        .linha-central {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-50%);
+            z-index: 1;
         }
 
         .roleta {
             display: flex;
+            align-items: center;
+            height: 100%;
             transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
             transform: translateX(0);
+            will-change: transform;
+    /* padding-left: 50%; REMOVIDO */
         }
 
         .item {
-            min-width: 180px;
-            height: 180px;
-            margin: 0 10px;
-            background: #111111;
-            border-radius: 15px;
+            width: 180px; /* Largura fixa */
+            height: 160px;
+            margin: 0 8px; /* Espaçamento */
+            background: var(--bg-item);
+            border-radius: 12px;
+            border-bottom: 3px solid #333;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
+            justify-content: space-between;
             flex-shrink: 0;
-            font-size: 14px;
+            padding: 15px 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .item img {
+            max-width: 90%;
+            max-height: 90px;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
+        }
+
+        .item span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
             text-align: center;
-            padding: 10px;
-            color: #fff;
+            line-height: 1.2;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .item.highlight {
-            background: #c20600;
-            box-shadow: 0 0 25px #00ff99, inset 0 0 10px white;
-            transform: scale(1.1);
+            background: linear-gradient(145deg, #2a2d36, #1e2026);
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.2), inset 0 0 0 2px var(--accent-gold);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        
+        .item.highlight span {
+            color: white;
         }
 
         .roleta-pointer {
             position: absolute;
-            top: -10px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 30px solid #ffcc00;
-            z-index: 10;
+            width: 4px;
+            height: 30px;
+            background: var(--accent-gold);
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 0 15px var(--accent-gold);
+            z-index: 20;
+        }
+        
+        /* Triângulo do pointer */
+        .roleta-pointer::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--accent-gold);
+        }
+
+        /* --- RESULTADO & BOTÕES --- */
+        #resultado {
+            margin: 10px 0 20px;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-red);
+            text-shadow: 0 2px 10px rgba(230, 57, 70, 0.3);
+            text-align: center;
+            min-height: 30px;
         }
 
         .botoes {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         #botaoGirar {
-            padding: 12px 30px;
+            padding: 14px 40px;
             font-size: 16px;
-            background: #c20600;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
             color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
         }
 
         #botaoGirar:hover {
-            background: #0f0e0f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
+            filter: brightness(1.1);
         }
+
+        #botaoGirar:active {
+            transform: translateY(1px);
+        }
+
+        #botaoPreview {
+            padding: 14px 30px;
+            font-size: 14px;
+            background: #3a86ff;
+            color: white;
+        }
+        #botaoPreview:hover { background: #2667cc; }
 
         #botaoReset {
-            padding: 6px 15px;
-            font-size: 13px;
-            background: #d62828;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        #botaoReset:hover {
-            background: #e63946;
-        }
-
-        #resultado {
-            margin-top: 15px;
-            font-size: 20px;
-            color: #c20600;
-        }
-
-        
-        #botaoPreview {
             padding: 10px 20px;
-            font-size: 15px;
-            background: #007bff;
+            font-size: 12px;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid #444;
+        }
+        #botaoReset:hover {
+            background: rgba(255,255,255,0.05);
             color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
+            border-color: #666;
         }
 
-        #botaoPreview:hover {
-            background: #0056b3;
+        /* --- TABELA --- */
+        .tabela-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-panel);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         table {
-            border-collapse: collapse;
             width: 100%;
-            max-width: 900px;
-            margin: 20px auto 0;
-            background: #111126;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            border-collapse: collapse;
         }
 
-        th, td {
-            border: 1px solid #333;
-            padding: 8px;
-            text-align: center;
+        th {
+            background: #23262f;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #2b2d35;
+        }
+        
+        th:last-child { text-align: right; }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #2b2d35;
+            color: var(--text-main);
             font-size: 14px;
         }
+        
+        td:last-child { text-align: right; }
 
-        th {
-            background: #3c3822;
-            color: white;
-        }
-
-
-        th {
-             background: #353535; 
-             color: rgb(255, 216, 216);
-        }
-
-        tr.disponivel {
-
-            background: linear-gradient(135deg, #161517 0%, #c20600 100%); 
-            font-weight: bold;
-        }
-
+        /* Status: Disponível */
         tr.disponivel td {
-
-            background: transparent; 
-            color: white;
+            color: #fff;
+        }
+        tr.disponivel td:last-child {
+            color: #4cd964; /* Verde */
+            font-weight: 600;
         }
 
-
-
+        /* Status: Sorteado */
         tr.sorteado {
- 
-            background-color: #c20600; 
-            font-weight: bold;
+            background: rgba(230, 57, 70, 0.05);
         }
-
         tr.sorteado td {
-
-            background: transparent;
-            color: white;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        tr.sorteado td:last-child {
+            text-decoration: none;
+            color: var(--primary-red);
+            font-weight: 600;
         }
 
         footer {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #aaa;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #555;
+        }
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        footer a:hover { color: var(--primary-red); }
+
+        /* Ajuste responsivo */
+        @media (max-width: 768px) {
+            .roleta-container { width: 95%; }
+            .item { width: 140px; height: 130px; }
         }
     </style>
 </head>
 <body>
 
-    <img src="images/saullologo.png" alt="Logo" class="logo-canto">
-    <img src="images/banner.png" alt="Banner" class="banner-topo">
+    <div class="main-wrapper">
+                <img src="images/banner.png" alt="Banner" class="banner-topo">
 
-    <div class="roleta-container">
-        <div class="roleta" id="roleta"></div>
-        <div class="roleta-pointer"></div>
-    </div>
+        <div class="roleta-container">
+            <div class="linha-central"></div>
+            <div class="roleta" id="roleta"></div>
+            <div class="roleta-pointer"></div>
+        </div>
 
-    <h2 id="resultado"></h2>
+        <h2 id="resultado"></h2>
 
-    <div class="botoes">
-        <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>    
-        <button id="botaoPreview" style="display:none;">Preview no CS2</button>
-    </div>
+        <div class="botoes">
+            <button id="botaoGirar" onclick="girarRoleta()">Girar Roleta</button>    
+            <button id="botaoPreview" style="display:none;">Ver no CS2</button>
+        </div>
 
-    <table>
-        <thead>
-            <tr><th>Item</th><th>Status</th></tr>
-        </thead>
-        <tbody id="tabelaItens"></tbody>
-    </table>
-    
-    <div class="botoes">
-    <button id="botaoReset" onclick="confirmarReset()">Resetar Itens</button>
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item (Skin)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaItens"></tbody>
+            </table>
+        </div>
+        
+        <div class="botoes" style="margin-top: 20px;">
+            <button id="botaoReset" onclick="confirmarReset()">Resetar Sorteio</button>
+        </div>
+
+        <footer>
+            Desenvolvido por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
+        </footer>
     </div>
 
     <audio id="tickSound" src="tick_sound.mp3" preload="auto"></audio>
     <audio id="dloreSound" src="dlore.mp3" preload="auto"></audio>
-
-    <footer>
-        Feito por <a href="https://github.com/alanmilan" target="_blank" rel="noopener noreferrer">Alan Milan - ShadowSong</a>
-    </footer>
 
     <script>
         const itensBase = [
@@ -273,10 +417,8 @@
             "Adagas Sombrias (★) | Massacre": "images/shadow.png",
             "Faca Navaja (★) | Massacre": "images/navaja.png",
             "Faixas (★) | Abate": "images/faixas.png",
-
         };
         
-
         const previewLinks = {
             "AWP Gungnir": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209559D12305145224011234949",
             "AWP | Degradê 0.0069": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561199503768916A45874153903D5477167310815278789",
@@ -296,9 +438,6 @@
             "Faca Gut Hook (★) | Degradê(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209704D14449836959064912636",
             "Faca Navaja (★) | Degradê": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209709D11529890904821208076",
             "Faca Navaja (★) | Degradê(2)": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198253291687A46247209709D11529890904821208076",
-
-
-            
         };
 
         const roleta = document.getElementById("roleta");
@@ -307,9 +446,13 @@
         const tickSound = document.getElementById("tickSound");
         const dloreSound = document.getElementById("dloreSound");
         const botaoPreview = document.getElementById("botaoPreview");
-        const itemFullWidth = 200;
+        
+        // Ajustei o itemFullWidth para bater com o CSS (180px largura + 16px margem total = ~196)
+        // Para garantir precisão, usamos getBoundingClientRect na lógica, mas aqui é valor base.
+        const itemFullWidth = 196; 
+        
         let isSpinning = false;
-        let lastSortedItem = null; // Para armazenar o último item sorteado
+        let lastSortedItem = null;
 
         function carregarItens() {
             const salvo = localStorage.getItem("itensRoleta");
@@ -332,7 +475,7 @@
             atualizarTabela();
             reconstruirRoleta();
             resultado.textContent = "";
-            botaoPreview.style.display = 'none'; // Esconde o botão ao resetar
+            botaoPreview.style.display = 'none';
         }
 
         let itens = carregarItens();
@@ -342,7 +485,8 @@
             for (const [nome, qtd] of Object.entries(itens)) {
                 const tr = document.createElement("tr");
                 tr.className = qtd > 0 ? "disponivel" : "sorteado";
-                tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "Não sorteado" : "Sorteado"}</td>`;
+                // Modifiquei levemente o texto para ficar mais "clean"
+                tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "DISPONÍVEL" : "SORTEADO"}</td>`;
                 tabela.appendChild(tr);
             }
         }
@@ -355,7 +499,7 @@
                 div.className = "item";
                 div.dataset.nome = nome;
                 div.innerHTML = `
-                    <img src="${imagens[nome]}" style="max-width: 100%; max-height: 120px;"><br>
+                    <img src="${imagens[nome]}" alt="${nome}">
                     <span>${nome}</span>
                 `;
                 roleta.appendChild(div);
@@ -364,6 +508,8 @@
 
         function getRandomDisponivel() {
             const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0).map(([nome]) => nome);
+            // Fallback se não tiver itens disponíveis (apenas visual)
+            if (disponiveis.length === 0) return Object.keys(itens)[0];
             return disponiveis[Math.floor(Math.random() * disponiveis.length)];
         }
 
@@ -371,72 +517,90 @@
             if (isSpinning) return;
             const disponiveis = Object.entries(itens).filter(([_, qtd]) => qtd > 0);
             if (disponiveis.length === 0) {
-                resultado.innerHTML = '<img src="images/todos_sorteados.png" alt="Todos os itens foram sorteados!" style="max-width: 100%; margin-top: 20px;">';
+                resultado.innerHTML = '<span style="color:white">Todos os itens foram sorteados! Resete para continuar.</span>';
                 return;
             }
 
             isSpinning = true;
-            botaoPreview.style.display = 'none'; // Esconde o botão ao iniciar o giro
+            botaoPreview.style.display = 'none';
             const nomeSorteado = getRandomDisponivel();
             reconstruirRoleta(nomeSorteado);
 
-            const items = roleta.querySelectorAll(".item");
-            const alvo = items[50];
-            const destino = alvo.offsetLeft;
-
-            roleta.style.transition = "none";
-            roleta.style.transform = "translateX(0)";
-            void roleta.offsetWidth;
+            // Pequeno delay para garantir renderização antes do cálculo
             setTimeout(() => {
-                roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
-                roleta.style.transform = `translateX(-${destino - (roleta.parentElement.offsetWidth / 2) + (itemFullWidth / 2)}px)`;
-                iniciarTickDuranteGiro(12000);
-            });
+                const items = roleta.querySelectorAll(".item");
+                const alvo = items[50];
+                
+                // Cálculo preciso baseado no offset real
+                const containerCenter = roleta.parentElement.offsetWidth / 2;
+                const alvoCenter = alvo.offsetLeft + (alvo.offsetWidth / 2);
+                const deslocamento = alvoCenter - containerCenter;
 
-            setTimeout(() => {
-                items.forEach(i => i.classList.remove("highlight"));
-                alvo.classList.add("highlight");
-                resultado.textContent = `🎯 Item sorteado será: ${nomeSorteado}`;
-                itens[nomeSorteado] = 0;
-                salvarItens(itens);
-                atualizarTabela();
-                isSpinning = false;
-                lastSortedItem = nomeSorteado; // Salva o item sorteado
+                // Força reset da posição
+                roleta.style.transition = "none";
+                roleta.style.transform = "translateX(0)";
+                
+                // Força reflow
+                void roleta.offsetWidth;
 
-                if (nomeSorteado === "AWP Dragon Lore") {
-                    dloreSound.play();
-                }
+                // Inicia animação
+                requestAnimationFrame(() => {
+                    roleta.style.transition = "transform 12s cubic-bezier(0.16, 1, 0.3, 1)";
+                    // Adiciona um pequeno valor randomico (-10 a +10px) para não cair sempre pixel-perfect no meio
+                    const randomOffset = Math.floor(Math.random() * 20) - 10;
+                    roleta.style.transform = `translateX(-${deslocamento + randomOffset}px)`;
+                    iniciarTickDuranteGiro(12000);
+                });
 
-                // Exibe o botão de preview se houver um link disponível
-                if (previewLinks[lastSortedItem]) {
-                    botaoPreview.style.display = 'inline-block';
-                }
+                setTimeout(() => {
+                    items.forEach(i => i.classList.remove("highlight"));
+                    alvo.classList.add("highlight");
+                    resultado.textContent = `🎉 ${nomeSorteado}`;
+                    itens[nomeSorteado] = 0;
+                    salvarItens(itens);
+                    atualizarTabela();
+                    isSpinning = false;
+                    lastSortedItem = nomeSorteado;
 
-            }, 12200);
+                    if (nomeSorteado === "AWP Dragon Lore") {
+                        dloreSound.play();
+                    }
+
+                    if (previewLinks[lastSortedItem]) {
+                        botaoPreview.style.display = 'inline-block';
+                    }
+
+                }, 12200);
+            }, 50);
         }
 
         function iniciarTickDuranteGiro(duracaoTotal) {
             let lastX = null, lastTickTime = 0, lastHighlightIndex = -1;
-            const tickMin = 30, tickMax = 250;
+            const tickMin = 50, tickMax = 300; // Ajustei levemente os ticks para ficar menos barulhento
             const startTime = performance.now();
             const center = roleta.parentElement.offsetWidth / 2;
+            // Largura real do item incluindo margem
+            const realItemWidth = 196; 
 
             function loop(now) {
                 const elapsed = now - startTime;
-                if (elapsed >= duracaoTotal - 500) return;
+                if (elapsed >= duracaoTotal - 200) return;
+                
                 const matrix = new DOMMatrix(getComputedStyle(roleta).transform);
                 const currentX = matrix.m41;
 
                 if (lastX !== null) {
                     const delta = Math.abs(currentX - lastX);
-                    const idealInterval = Math.max(tickMin, Math.min(tickMax, 800 / (delta + 0.1)));
-                    if (now - lastTickTime > idealInterval) {
-                        const visualCenter = Math.abs(currentX) + center;
-                        const index = Math.floor(visualCenter / itemFullWidth);
-                        if (index !== lastHighlightIndex) {
-                            tickSound.pause();
-                            tickSound.currentTime = 0;
-                            tickSound.play();
+                    // Lógica para tocar som
+                    const visualPos = Math.abs(currentX) + center;
+                    const index = Math.floor(visualPos / realItemWidth);
+
+                    if (index !== lastHighlightIndex && delta > 0.5) {
+                         // Evita spam de som muito rápido no início
+                        if (now - lastTickTime > 40) {
+                            const clone = tickSound.cloneNode();
+                            clone.volume = 0.5; // Volume mais baixo
+                            clone.play().catch(e => {});
                             lastTickTime = now;
                             lastHighlightIndex = index;
                         }
@@ -449,10 +613,8 @@
             requestAnimationFrame(loop);
         }
 
-        // Adiciona um listener de clique ao botão de preview
         botaoPreview.addEventListener('click', () => {
              if (lastSortedItem && previewLinks[lastSortedItem]) {
-        // Abre o link em uma nova guia
                 window.open(previewLinks[lastSortedItem], '_blank');
             }
         });
@@ -462,24 +624,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
