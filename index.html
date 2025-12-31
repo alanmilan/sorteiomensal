@@ -353,65 +353,48 @@
 
     <script>
         const itensBase = [
-            "M4A4 | Uivo", "M4A1-S | Arma Esportiva 0.009", "MP9 | Arma Esportiva", "Canivete Borboleta (★) | Massacre", "Karambit (★) | Massacre", "Baioneta M9 (★) | Massacre", "Faca Talon (★) | Massacre",
-            "Faca Esqueleto (★) | Massacre", "Faca Stiletto (★ StatTrak™) | Massacre", "Baioneta (★) | Massacre",
-            "Faca Nômade (★) | Massacre","Canivete (★ StatTrak™) | Massacre", "Faca Bowie (★) | Massacre", "Faca Clássica (★ StatTrak™) | Massacre", "Faca do Caçador (★) | Massacre", "Faca Kukri (★) | Massacre", "Faca Ursus (★) | Massacre", "Canivete Falchion (★) | Massacre","Faca de Cordame (★ StatTrak™) | Massacre", "Canivete Falchion (★) | Massacre","Faca de Sobrevivência (★) | Massacre",
-            "Faca Gut Hook (★) | Massacre", "Adagas Sombrias (★) | Massacre", "Faca Navaja (★) | Massacre", "Faixas (★) | Abate"
+            "AWP | Sabedoria do Dragão FT",
+            "AK-47 (Lembrança) | Arabesca Dourada FT",
+            "AK-47 | A Oligarca MW",
+            "Canivete Borboleta (★) | Doppler Gama FN",
+            "Canivete Borboleta (★) | Sabedoria MW",
+            "Canivete Borboleta (★) | Sabedoria MW", 
+            "Canivete Borboleta (★) | Sabedoria FT",
+            "Karambit (★) | Sabedoria FT",
+            "Karambit (★) | Sabedoria FT",
+            "Baioneta M9 (★) | Sabedoria MW",
+            "Baioneta M9 (★ StatTrak™) | Sabedoria FT",
+            "Baioneta (★) | Sabedoria MW",
+            "Canivete (★) | Sabedoria FN",
+            "Faca Bowie (★) | Sabedoria FN",
+            "Faca do Caçador (★) | Sabedoria MW",
+            "Canivete Falchion (★) | Sabedoria FN",
+            "Adagas Sombrias (★) | Sabedoria FN",
+            "Faca Gut Hook (★) | Sabedoria FN"
         ];
 
         const imagens = {
-            "M4A4 | Uivo": "images/m4a4.png",
-            "M4A1-S | Arma Esportiva 0.009": "images/m4a1s.png", 
-            "MP9 | Arma Esportiva": "images/mp9.png",
-            "Canivete Borboleta (★) | Massacre": "images/butterfly.png", 
-            "Karambit (★) | Massacre": "images/karambit.png",
-            "Baioneta M9 (★) | Massacre": "images/m9.png",
-            "Faca Talon (★) | Massacre": "images/talon.png",
-            "Faca Esqueleto (★) | Massacre": "images/skeleton.png",
-            "Faca Stiletto (★ StatTrak™) | Massacre": "images/stiletto.png",
-            "Baioneta (★) | Massacre": "images/bayonet.png",
-            "Faca Nômade (★) | Massacre": "images/nomad.png", 
-            "Canivete (★ StatTrak™) | Massacre": "images/flip.png",
-            "Faca Bowie (★) | Massacre": "images/bowie.png",
-            "Faca Clássica (★ StatTrak™) | Massacre": "images/classic.png",
-            "Faca do Caçador (★) | Massacre": "images/huntsman.png",
-            "Faca Kukri (★) | Massacre": "images/kukri.png",
-            "Faca Ursus (★) | Massacre": "images/ursus.png",
-            "Canivete Falchion (★) | Massacre": "images/falchion.png",
-            "Faca de Cordame (★ StatTrak™) | Massacre": "images/paracord.png",
-            "Faca de Sobrevivência (★) | Massacre": "images/survival.png",
-            "Faca Gut Hook (★) | Massacre": "images/gut.png",
-            "Adagas Sombrias (★) | Massacre": "images/shadow.png",
-            "Faca Navaja (★) | Massacre": "images/navaja.png",
-            "Faixas (★) | Abate": "images/faixas.png",
+            "AWP | Sabedoria do Dragão FT": "images/dragonlore.png",
+            "AK-47 (Lembrança) | Arabesca Dourada FT": "images/ak47.png",
+            "AK-47 | A Oligarca MW": "images/ak47o.png",
+            "Canivete Borboleta (★) | Doppler Gama FN": "images/butterflyg.png",
+            "Canivete Borboleta (★) | Sabedoria MW": "images/butterflys.png",
+            "Canivete Borboleta (★) | Sabedoria FT": "images/butterflys.png",
+            "Karambit (★) | Sabedoria FT": "images/karambit.png",
+            "Baioneta M9 (★) | Sabedoria MW": "images/m9.png",
+            "Baioneta M9 (★ StatTrak™) | Sabedoria FT": "images/m9.png",
+            "Baioneta (★) | Sabedoria MW": "images/bayonet.png",
+            "Canivete (★) | Sabedoria FN": "images/flip.png",
+            "Faca Bowie (★) | Sabedoria FN": "images/bowie.png",
+            "Faca do Caçador (★) | Sabedoria MW": "images/huntsman.png",
+            "Canivete Falchion (★) | Sabedoria FN": "images/falchion.png",
+            "Adagas Sombrias (★) | Sabedoria FN": "images/shadow.png",
+            "Faca Gut Hook (★) | Sabedoria FN": "images/gut.png"
         };
         
         
         const previewLinks = {
-            "M4A4 | Uivo": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46249208568D14334408437437112460",
-            "M4A1-S | Arma Esportiva 0.009": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46753127670D11839474002969492840",
-            "MP9 | Arma Esportiva": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46754420213D3027767407842223260",
-            "Canivete Borboleta (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46654375222D7227411084681579121",
-            "Karambit (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46654459291D11970577335080834617",
-            "Baioneta M9 (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46654548407D14738633154572448652",
-            "Faca Talon (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A45625247123D354736384190076569",
-            "Faca Esqueleto (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A48092952706D3316552146181053761",
-            "Faca Stiletto (★ StatTrak™) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46657454567D7954142778889212016",
-            "Baioneta (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752320044D3071638217783075116",
-            "Faca Nômade (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752368515D10298266503554013925",
-            "Canivete (★ StatTrak™) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752441930D1066832544459757769",
-            "Faca Bowie (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752515630D7974890440166262292",
-            "Faca Clássica (★ StatTrak™) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752591222D11549481413294131601",
-            "Faca do Caçador (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752650640D10090957139869127109",
-            "Faca Kukri (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752755460D12604526641470249460",
-            "Faca Ursus (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46752830031D13902201504177891289",
-            "Canivete Falchion (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46762831060D5683622978058610316",
-            "Faca de Cordame (★ StatTrak™) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46753967212D5494513539676931525",
-            "Faca de Sobrevivência (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46763233419D11684280100999965656",
-            "Faca Gut Hook (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46761360652D7091024178840040664",
-            "Adagas Sombrias (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46763276524D63875509719459652",
-            "Faca Navaja (★) | Massacre": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46763371364D9954858278780050016",
-            "Faixas (★) | Abate": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A46754510587D10134764327754677376"
+            // Links removidos pois os itens mudaram. Adicione os links steam:// se desejar.
         };
 
         const roleta = document.getElementById("roleta");
@@ -526,8 +509,8 @@
                     isSpinning = false;
                     lastSortedItem = nomeSorteado;
 
-                    if (nomeSorteado === "AWP Dragon Lore") {
-                        dloreSound.play();
+                    if (nomeSorteado.includes("Sabedoria do Dragão")) {
+                        dloreSound.play().catch(e => console.log(e));
                     }
 
                     if (previewLinks[lastSortedItem]) {
@@ -584,9 +567,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
