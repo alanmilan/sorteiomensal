@@ -317,7 +317,7 @@
     <div class="main-wrapper">        
         <img src="images/banner.png" alt="Banner" class="banner-topo">
 
-        <div class="roleta-container">           
+        <div class="roleta-container">            
             <div class="roleta" id="roleta"></div>
             <div class="roleta-pointer"></div>
         </div>
@@ -351,85 +351,52 @@
 
     <script>
         const itensBase = [
-            "M4A4 | Uivo MW",
-            "Canivete Borboleta (★) | Mármore Desbotado",
-            "Canivete Borboleta (★) | Mármore Desbotado (2)",
-            "Karambit (★) | Mármore Desbotado",
-            "Karambit (★) | Mármore Desbotado (2)",
-            "Baioneta M9 (★) | Mármore Desbotado",
-            "Baioneta M9 (★) | Mármore Desbotado (2)",
-            "Faca Talon (★) | Mármore Desbotado",
-            "Faca Talon (★) | Mármore Desbotado (2)",
-            "Faca Esqueleto (★) | Mármore Desbotado",
-            "Faca Esqueleto (★) | Mármore Desbotado (2)",
-            "Baioneta (★) | Mármore Desbotado",
-            "Baioneta (★) | Mármore Desbotado (2)",
-            "Faca Stiletto (★) | Mármore Desbotado",
-            "Faca Stiletto (★) | Mármore Desbotado (2)",
-            "Canivete (★) | Mármore Desbotado",
-            "Canivete (★) | Mármore Desbotado (2)",
-            "Canivete Falchion (★) | Mármore Desbotado",
-            "Canivete Falchion (★) | Mármore Desbotado (2)",
-            "Faca Nômade (★) | Mármore Desbotado",
-            "Faca Nômade (★) | Mármore Desbotado (2)",
-            "Faca Bowie (★) | Mármore Desbotado",
-            "Faca Bowie (★) | Mármore Desbotado (2)",
-            "Faca do Caçador (★) | Mármore Desbotado",
-            "Faca do Caçador (★) | Mármore Desbotado (2)",
-            "Faca Ursus (★) | Mármore Desbotado",
-            "Faca Ursus (★) | Mármore Desbotado (2)",
-            "Faca de Sobrevivência (★) | Mármore Desbotado",
-            "Faca de Sobrevivência (★) | Mármore Desbotado (2)",
-            "Faca de Cordame (★) | Mármore Desbotado",
-            "Faca de Cordame (★) | Mármore Desbotado (2)",
-            "Faca Gut Hook (★) | Mármore Desbotado",
-            "Faca Gut Hook (★) | Mármore Desbotado (2)",
-            "Faca Navaja (★) | Mármore Desbotado",
-            "Faca Navaja (★) | Mármore Desbotado (2)",
-            "Adagas Sombrias (★) | Mármore Desbotado",
-            "Adagas Sombrias (★) | Mármore Desbotado (2)"
+            "AWP | Sabedoria do Dragão",
+            "Canivete Borboleta (★) | Sabedoria",
+            "Canivete Borboleta (★) | Sabedoria (1)",
+            "Canivete Borboleta (★) | Sabedoria (2)",
+            "Canivete Borboleta (★) | Sabedoria (3)",
+            "Canivete Borboleta (★) | Sabedoria (4)",
+            "Canivete Borboleta (★) | Sabedoria (5)",
+            "Canivete Borboleta (★) | Sabedoria (6)",
+            "Canivete Borboleta (★) | Sabedoria (7)",
+            "Canivete Borboleta (★) | Sabedoria (8)",
+            "Canivete Borboleta (★) | Sabedoria (9)",
+            "Canivete Borboleta (★) | Sabedoria (10)",
+            "Canivete Borboleta (★) | Sabedoria (11)",
+            "Canivete Borboleta (★) | Sabedoria (12)",
+            "Canivete Borboleta (★) | Sabedoria (13)",
+            "Canivete Borboleta (★) | Sabedoria (14)",
+            "Canivete Borboleta (★) | Sabedoria (15)",
+            "Canivete Borboleta (★) | Sabedoria (16)",
+            "Canivete Borboleta (★) | Sabedoria (17)",
+            "Canivete Borboleta (★) | Sabedoria (18)",
+            "Canivete Borboleta (★) | Sabedoria (19)"
         ];
 
         const imagens = {
-            "M4A4 | Uivo MW": "images/howl.png",
-            "Canivete Borboleta (★) | Mármore Desbotado": "images/butterfly.png",
-            "Canivete Borboleta (★) | Mármore Desbotado (2)": "images/butterfly.png",
-            "Karambit (★) | Mármore Desbotado": "images/karambit.png",
-            "Karambit (★) | Mármore Desbotado (2)": "images/karambit.png",
-            "Baioneta M9 (★) | Mármore Desbotado": "images/m9.png",
-            "Baioneta M9 (★) | Mármore Desbotado (2)": "images/m9.png",
-            "Faca Talon (★) | Mármore Desbotado": "images/talon.png",
-            "Faca Talon (★) | Mármore Desbotado (2)": "images/talon.png",
-            "Faca Esqueleto (★) | Mármore Desbotado": "images/skeleton.png",
-            "Faca Esqueleto (★) | Mármore Desbotado (2)": "images/skeleton.png",
-            "Baioneta (★) | Mármore Desbotado": "images/bayonet.png",
-            "Baioneta (★) | Mármore Desbotado (2)": "images/bayonet.png",
-            "Faca Stiletto (★) | Mármore Desbotado": "images/stiletto.png",
-            "Faca Stiletto (★) | Mármore Desbotado (2)": "images/stiletto.png",
-            "Canivete (★) | Mármore Desbotado": "images/flip.png",
-            "Canivete (★) | Mármore Desbotado (2)": "images/flip.png",
-            "Canivete Falchion (★) | Mármore Desbotado": "images/falchion.png",
-            "Canivete Falchion (★) | Mármore Desbotado (2)": "images/falchion.png",
-            "Faca Nômade (★) | Mármore Desbotado": "images/nomad.png",
-            "Faca Nômade (★) | Mármore Desbotado (2)": "images/nomad.png",
-            "Faca Bowie (★) | Mármore Desbotado": "images/bowie.png",
-            "Faca Bowie (★) | Mármore Desbotado (2)": "images/bowie.png",
-            "Faca do Caçador (★) | Mármore Desbotado": "images/huntsman.png",
-            "Faca do Caçador (★) | Mármore Desbotado (2)": "images/huntsman.png",
-            "Faca Ursus (★) | Mármore Desbotado": "images/ursus.png",
-            "Faca Ursus (★) | Mármore Desbotado (2)": "images/ursus.png",
-            "Faca de Sobrevivência (★) | Mármore Desbotado": "images/survival.png",
-            "Faca de Sobrevivência (★) | Mármore Desbotado (2)": "images/survival.png",
-            "Faca de Cordame (★) | Mármore Desbotado": "images/paracord.png",
-            "Faca de Cordame (★) | Mármore Desbotado (2)": "images/paracord.png",
-            "Faca Gut Hook (★) | Mármore Desbotado": "images/gut.png",
-            "Faca Gut Hook (★) | Mármore Desbotado (2)": "images/gut.png",
-            "Faca Navaja (★) | Mármore Desbotado": "images/navaja.png",
-            "Faca Navaja (★) | Mármore Desbotado (2)": "images/navaja.png",
-            "Adagas Sombrias (★) | Mármore Desbotado": "images/shadow.png",
-            "Adagas Sombrias (★) | Mármore Desbotado (2)": "images/shadow.png"
+            "AWP | Sabedoria do Dragão": "images/dlore.png",
+            "Canivete Borboleta (★) | Sabedoria": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (1)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (2)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (3)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (4)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (5)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (6)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (7)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (8)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (9)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (10)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (11)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (12)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (13)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (14)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (15)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (16)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (17)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (18)": "images/butterfly.png",
+            "Canivete Borboleta (★) | Sabedoria (19)": "images/butterfly.png"
         };
-        
         
         const previewLinks = {
             "AWP | Sabedoria do Dragão FT": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A47276066254D10296429863225269413",
@@ -450,9 +417,6 @@
             "Canivete Falchion (★) | Sabedoria FN": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A47953956080D5507449614500814852",
             "Adagas Sombrias (★) | Sabedoria FN": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A47954670638D3064136976088991680",
             "Faca Gut Hook (★) | Sabedoria FN": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198399298856A47954700787D2650621859807351860",
-            
-            
-            
         };
 
         const roleta = document.getElementById("roleta");
@@ -625,11 +589,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
