@@ -351,55 +351,59 @@
 
     <script>
         const itensBase = [
-            "AK-47 | Lótus Selvagem",
-            "Canivete Borboleta (★) | Doppler Gama #1",
-            "Canivete Borboleta (★) | Doppler Gama #2",
-            "Karambit (★) | Doppler Gama #1",
-            "Karambit (★) | Doppler Gama #2",
-            "Baioneta M9 (★) | Doppler Gama #1",
-            "Baioneta M9 (★) | Doppler Gama #2",
-            "Baioneta (★) | Doppler Gama #1",
-            "Baioneta (★) | Doppler Gama #2",
-            "Canivete (★) | Doppler Gama #1",
-            "Canivete (★) | Doppler Gama #2",
-            "Canivete Falchion (★) | Doppler Gama #1",
-            "Canivete Falchion (★) | Doppler Gama #2",
-            "Faca do Caçador (★) | Doppler Gama #1",
-            "Faca do Caçador (★) | Doppler Gama #2",
-            "Faca Bowie (★) | Doppler Gama #1",
-            "Faca Bowie (★) | Doppler Gama #2",
-            "Faca Gut Hook (★) | Doppler Gama #1",
-            "Faca Gut Hook (★) | Doppler Gama #2",
-            "Adagas Sombrias (★) | Doppler Gama #1",
-            "Adagas Sombrias (★) | Doppler Gama #2",
-            "Glock-18 | Doppler Gama #1",
-            "Glock-18 | Doppler Gama #2"
+            "AWP | Sabedoria do Dragão",
+            "Glock-18 | Degradê",
+            "AWP | Degradê",
+            "M4A1-S | Degradê",
+            "Canivete Borboleta (★) | Degradê",
+            "Karambit (★) | Degradê",
+            "Baioneta M9 (★) | Degradê",
+            "Faca Talon (★) | Degradê",
+            "Faca Stiletto (★) | Degradê",
+            "Faca Esqueleto (★) | Degradê",
+            "Baioneta (★) | Degradê",
+            "Faca Kukri (★) | Degradê",
+            "Faca Nômade (★) | Degradê",
+            "Faca de Sobrevivência (★) | Degradê",
+            "Faca de Cordame (★) | Degradê",
+            "Faca Clássica (★) | Degradê",
+            "Faca Ursus (★) | Degradê",
+            "Faca Bowie (★) | Degradê",
+            "Canivete Falchion (★) | Degradê",
+            "Faca do Caçador (★) | Degradê",
+            "Canivete (★) | Degradê",
+            "Faca Gut Hook (★) | Degradê",
+            "Faca Navaja (★) | Degradê",
+            "Adagas Sombrias (★) | Degradê",
+            "Luvas de Especialista (★) | Degradê"
         ];
 
         const imagens = {
-            "AK-47 | Lótus Selvagem": "images/lotus.png",
-            "Canivete Borboleta (★) | Doppler Gama #1": "images/butterfly.png",
-            "Canivete Borboleta (★) | Doppler Gama #2": "images/butterfly.png",
-            "Karambit (★) | Doppler Gama #1": "images/karambit.png",
-            "Karambit (★) | Doppler Gama #2": "images/karambit.png",
-            "Baioneta M9 (★) | Doppler Gama #1": "images/m9.png",
-            "Baioneta M9 (★) | Doppler Gama #2": "images/m9.png",
-            "Baioneta (★) | Doppler Gama #1": "images/bayonet.png",
-            "Baioneta (★) | Doppler Gama #2": "images/bayonet.png",
-            "Canivete (★) | Doppler Gama #1": "images/flip.png",
-            "Canivete (★) | Doppler Gama #2": "images/flip.png",
-            "Canivete Falchion (★) | Doppler Gama #1": "images/falchion.png",
-            "Canivete Falchion (★) | Doppler Gama #2": "images/falchion.png",
-            "Faca do Caçador (★) | Doppler Gama #1": "images/huntsman.png",
-            "Faca do Caçador (★) | Doppler Gama #2": "images/huntsman.png",
-            "Faca Bowie (★) | Doppler Gama #1": "images/bowie.png",
-            "Faca Bowie (★) | Doppler Gama #2": "images/bowie.png",
-            "Faca Gut Hook (★) | Doppler Gama #1": "images/gut.png",
-            "Faca Gut Hook (★) | Doppler Gama #2": "images/gut.png",
-            "Adagas Sombrias (★) | Doppler Gama #1": "images/shadow.png",
-            "Adagas Sombrias (★) | Doppler Gama #2": "images/shadow.png",
-            "Glock-18 | Doppler Gama #1": "images/glock.png",
-            "Glock-18 | Doppler Gama #2": "images/glock.png"
+            "AWP | Sabedoria do Dragão": "images/dlore.png",
+            "Glock-18 | Degradê": "images/glock.png",
+            "AWP | Degradê": "images/awp_fade.png",
+            "M4A1-S | Degradê": "images/m4a1s_fade.png",
+            "Canivete Borboleta (★) | Degradê": "images/butterfly.png",
+            "Karambit (★) | Degradê": "images/karambit.png",
+            "Baioneta M9 (★) | Degradê": "images/m9.png",
+            "Faca Talon (★) | Degradê": "images/talon.png",
+            "Faca Stiletto (★) | Degradê": "images/stiletto.png",
+            "Faca Esqueleto (★) | Degradê": "images/skeleton.png",
+            "Baioneta (★) | Degradê": "images/bayonet.png",
+            "Faca Kukri (★) | Degradê": "images/kukri.png",
+            "Faca Nômade (★) | Degradê": "images/nomad.png",
+            "Faca de Sobrevivência (★) | Degradê": "images/survival.png",
+            "Faca de Cordame (★) | Degradê": "images/paracord.png",
+            "Faca Clássica (★) | Degradê": "images/classic.png",
+            "Faca Ursus (★) | Degradê": "images/ursus.png",
+            "Faca Bowie (★) | Degradê": "images/bowie.png",
+            "Canivete Falchion (★) | Degradê": "images/falchion.png",
+            "Faca do Caçador (★) | Degradê": "images/huntsman.png",
+            "Canivete (★) | Degradê": "images/flip.png",
+            "Faca Gut Hook (★) | Degradê": "images/gut.png",
+            "Faca Navaja (★) | Degradê": "images/navaja.png",
+            "Adagas Sombrias (★) | Degradê": "images/shadow.png",
+            "Luvas de Especialista (★) | Degradê": "images/gloves.png"
         };
         
         const previewLinks = {
@@ -518,7 +522,7 @@
                     isSpinning = false;
                     lastSortedItem = nomeSorteado;
 
-                    if (nomeSorteado.includes("Sabedoria do Dragão") || nomeSorteado.includes("Lótus Selvagem")) {
+                    if (nomeSorteado.includes("Sabedoria do Dragão")) {
                         if(dloreSound) dloreSound.play().catch(e => console.log(e));
                     }
 
