@@ -243,6 +243,16 @@
         }
         #botaoPreview:hover { background: #2667cc; }
 
+        #botaoBaixar {
+            padding: 14px 30px;
+            font-size: 14px;
+            background: #4cd964;
+            color: #1b1d24;
+        }
+        #botaoBaixar:hover {
+            background: #3eb551;
+        }
+
         #botaoReset {
             padding: 10px 20px;
             font-size: 12px;
@@ -256,7 +266,7 @@
             border-color: #666;
         }
 
-        /* --- TABELA --- */
+        /* --- TABELA E INPUTS --- */
         .tabela-container {
             width: 100%;
             max-width: 900px;
@@ -281,22 +291,39 @@
             text-align: left;
             border-bottom: 2px solid #2b2d35;
         }
-        th:last-child { text-align: right; }
-
+        
         td {
             padding: 15px;
             border-bottom: 1px solid #2b2d35;
             color: var(--text-main);
             font-size: 14px;
+            vertical-align: middle;
         }
-        td:last-child { text-align: right; }
+
+        /* Inputs para Csgonet e $ */
+        .input-tabela {
+            background: #0f1014;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            width: 100%;
+            max-width: 150px;
+            transition: border-color 0.2s;
+        }
+        .input-tabela:focus {
+            border-color: var(--primary-red);
+            outline: none;
+        }
 
         tr.disponivel td { color: #fff; }
-        tr.disponivel td:last-child { color: #4cd964; font-weight: 600; }
+        tr.disponivel td:last-child { color: #4cd964; font-weight: 600; text-align: right; }
 
         tr.sorteado { background: rgba(230, 57, 70, 0.05); }
-        tr.sorteado td { color: var(--text-muted); text-decoration: line-through; opacity: 0.6; }
-        tr.sorteado td:last-child { text-decoration: none; color: var(--primary-red); font-weight: 600; }
+        tr.sorteado td:first-child { color: var(--text-muted); text-decoration: line-through; opacity: 0.6; }
+        tr.sorteado td:last-child { color: var(--primary-red); font-weight: 600; text-align: right; }
 
         footer {
             margin-top: 40px;
@@ -332,13 +359,19 @@
         <div class="tabela-container">
             <table>
                 <thead>
-                    <tr><th>Item (Skin)</th><th>Status</th></tr>
+                    <tr>
+                        <th>Item (Skin)</th>
+                        <th style="width: 180px;">ID CSGonet</th>
+                        <th style="width: 180px;">$ Depositados</th>
+                        <th style="text-align: right;">Status</th>
+                    </tr>
                 </thead>
                 <tbody id="tabelaItens"></tbody>
             </table>
         </div>
         
         <div class="botoes" style="margin-top: 20px;">
+            <button id="botaoBaixar" onclick="baixarTXT()">Baixar TXT</button>
             <button id="botaoReset" onclick="confirmarReset()">Resetar Sorteio</button>
         </div>
 
@@ -352,53 +385,51 @@
 
     <script>
         const itensBase = [
-            "AWP | Sabedoria do Dragão",
-            "M4A4 | Uivo",
-            "Canivete Borboleta (★) | Degradê",
-            "Karambit (★) | Degradê",
-            "Baioneta M9 (★) | Degradê",
-            "Faca Talon (★) | Degradê",
-            "Faca Esqueleto (★) | Degradê",
-            "Faca Stiletto (★) | Degradê",
-            "Baioneta (★) | Degradê",
-            "Faca Kukri (★) | Degradê",
-            "Faca Nômade (★) | Degradê",
-            "Faca de Sobrevivência (★) | Degradê",
-            "Faca de Cordame (★) | Degradê",
-            "Faca Clássica (★) | Degradê",
-            "Faca Ursus (★) | Degradê",
-            "Faca Bowie (★) | Degradê",
-            "Canivete Falchion (★) | Degradê",
-            "Faca do Caçador (★) | Degradê",
-            "Canivete (★) | Degradê",
-            "Faca Gut Hook (★) | Degradê",
-            "Faca Navaja (★) | Degradê",
-            "Adagas Sombrias (★) | Degradê"
+            "AWP | Gungnir FT",
+            "Canivete Borboleta (★) | Doppler #1",
+            "Canivete Borboleta (★) | Doppler #2",
+            "Canivete Borboleta (★) | Doppler #3",
+            "Karambit (★) | Doppler",
+            "Baioneta M9 (★) | Doppler",
+            "Faca Talon (★) | Doppler",
+            "Faca Esqueleto (★) | Doppler",
+            "Faca Nômade (★) | Doppler",
+            "Faca Stiletto (★) | Doppler",
+            "Baioneta (★) | Doppler",
+            "Faca do Caçador (★) | Doppler",
+            "Canivete Falchion (★) | Doppler",
+            "Faca Bowie (★) | Doppler",
+            "Faca Ursus (★) | Doppler",
+            "Canivete (★) | Doppler",
+            "Faca de Cordame (★) | Doppler",
+            "Faca de Sobrevivência (★) | Doppler",
+            "Faca Gut Hook (★) | Doppler",
+            "Adagas Sombrias (★) | Doppler",
+            "Faca Navaja (★) | Doppler"
         ];
 
         const imagens = {
-            "AWP | Sabedoria do Dragão": "images/dlore.png",
-            "M4A4 | Uivo": "images/howl.png",
-            "Canivete Borboleta (★) | Degradê": "images/butterfly.png",
-            "Karambit (★) | Degradê": "images/karambit.png",
-            "Baioneta M9 (★) | Degradê": "images/m9.png",
-            "Faca Talon (★) | Degradê": "images/talon.png",
-            "Faca Esqueleto (★) | Degradê": "images/skeleton.png",
-            "Faca Stiletto (★) | Degradê": "images/stiletto.png",
-            "Baioneta (★) | Degradê": "images/bayonet.png",
-            "Faca Kukri (★) | Degradê": "images/kukri.png",
-            "Faca Nômade (★) | Degradê": "images/nomad.png",
-            "Faca de Sobrevivência (★) | Degradê": "images/survival.png",
-            "Faca de Cordame (★) | Degradê": "images/paracord.png",
-            "Faca Clássica (★) | Degradê": "images/classic.png",
-            "Faca Ursus (★) | Degradê": "images/ursus.png",
-            "Faca Bowie (★) | Degradê": "images/bowie.png",
-            "Canivete Falchion (★) | Degradê": "images/falchion.png",
-            "Faca do Caçador (★) | Degradê": "images/huntsman.png",
-            "Canivete (★) | Degradê": "images/flip.png",
-            "Faca Gut Hook (★) | Degradê": "images/gut.png",
-            "Faca Navaja (★) | Degradê": "images/navaja.png",
-            "Adagas Sombrias (★) | Degradê": "images/shadow.png"
+            "AWP | Gungnir FT": "images/gungnir.png",
+            "Canivete Borboleta (★) | Doppler #1": "images/butterfly.png",
+            "Canivete Borboleta (★) | Doppler #2": "images/butterfly.png",
+            "Canivete Borboleta (★) | Doppler #3": "images/butterfly.png",
+            "Karambit (★) | Doppler": "images/karambit.png",
+            "Baioneta M9 (★) | Doppler": "images/m9.png",
+            "Faca Talon (★) | Doppler": "images/talon.png",
+            "Faca Esqueleto (★) | Doppler": "images/skeleton.png",
+            "Faca Nômade (★) | Doppler": "images/nomad.png",
+            "Faca Stiletto (★) | Doppler": "images/stiletto.png",
+            "Baioneta (★) | Doppler": "images/bayonet.png",
+            "Faca do Caçador (★) | Doppler": "images/huntsman.png",
+            "Canivete Falchion (★) | Doppler": "images/falchion.png",
+            "Faca Bowie (★) | Doppler": "images/bowie.png",
+            "Faca Ursus (★) | Doppler": "images/ursus.png",
+            "Canivete (★) | Doppler": "images/flip.png",
+            "Faca de Cordame (★) | Doppler": "images/paracord.png",
+            "Faca de Sobrevivência (★) | Doppler": "images/survival.png",
+            "Faca Gut Hook (★) | Doppler": "images/gut.png",
+            "Adagas Sombrias (★) | Doppler": "images/shadow.png",
+            "Faca Navaja (★) | Doppler": "images/navaja.png"
         };
         
         const previewLinks = {};
@@ -415,6 +446,7 @@
         let isSpinning = false;
         let lastSortedItem = null;
 
+        // ---------- GERENCIAMENTO DE DADOS (STATUS E INPUTS) ----------
         function carregarItens() {
             const salvo = localStorage.getItem("itensRoleta");
             return salvo ? JSON.parse(salvo) : Object.fromEntries(itensBase.map(i => [i, 1]));
@@ -424,33 +456,94 @@
             localStorage.setItem("itensRoleta", JSON.stringify(itens));
         }
 
+        function carregarDadosExtra() {
+            const salvo = localStorage.getItem("dadosExtraRoleta");
+            return salvo ? JSON.parse(salvo) : {};
+        }
+
+        function salvarDadosExtra() {
+            localStorage.setItem("dadosExtraRoleta", JSON.stringify(dadosExtra));
+        }
+
+        let itens = carregarItens();
+        let dadosExtra = carregarDadosExtra(); // Guarda os inputs para não apagar ao re-renderizar
+
         function confirmarReset() {
-            if (confirm("Você quer mesmo resetar os itens?")) {
+            if (confirm("Você quer mesmo resetar os itens e apagar os dados digitados?")) {
                 resetarItens();
             }
         }
 
         function resetarItens() {
             localStorage.removeItem("itensRoleta");
+            localStorage.removeItem("dadosExtraRoleta");
             itens = carregarItens();
+            dadosExtra = {};
             atualizarTabela();
             reconstruirRoleta();
             resultado.textContent = "";
             botaoPreview.style.display = 'none';
         }
 
-        let itens = carregarItens();
-
+        // ---------- TABELA ----------
         function atualizarTabela() {
             tabela.innerHTML = "";
             for (const [nome, qtd] of Object.entries(itens)) {
+                // Se não existir dados desse item, cria os campos vazios
+                if (!dadosExtra[nome]) {
+                    dadosExtra[nome] = { id: "", dol: "" };
+                }
+
                 const tr = document.createElement("tr");
                 tr.className = qtd > 0 ? "disponivel" : "sorteado";
-                tr.innerHTML = `<td>${nome}</td><td>${qtd > 0 ? "DISPONÍVEL" : "SORTEADO"}</td>`;
+                
+                tr.innerHTML = `
+                    <td>${nome}</td>
+                    <td><input type="text" class="input-tabela id-input" placeholder="Ex: 12345" value="${dadosExtra[nome].id}"></td>
+                    <td><input type="text" class="input-tabela dol-input" placeholder="Ex: 50.00" value="${dadosExtra[nome].dol}"></td>
+                    <td>${qtd > 0 ? "DISPONÍVEL" : "SORTEADO"}</td>
+                `;
+
+                // Salva automaticamente enquanto você digita
+                tr.querySelector('.id-input').addEventListener('input', (e) => {
+                    dadosExtra[nome].id = e.target.value;
+                    salvarDadosExtra();
+                });
+
+                tr.querySelector('.dol-input').addEventListener('input', (e) => {
+                    dadosExtra[nome].dol = e.target.value;
+                    salvarDadosExtra();
+                });
+
                 tabela.appendChild(tr);
             }
         }
 
+        // ---------- BOTÃO BAIXAR TXT ----------
+        function baixarTXT() {
+            let texto = "";
+            
+            for (const nome of itensBase) {
+                const idStr = dadosExtra[nome] && dadosExtra[nome].id ? dadosExtra[nome].id : "";
+                const dolStr = dadosExtra[nome] && dadosExtra[nome].dol ? dadosExtra[nome].dol : "";
+                
+                texto += `${nome}-\n`;
+                texto += `Id Csgonet: ${idStr}\n`;
+                texto += `$ Depositados: ${dolStr}\n\n`;
+            }
+
+            const blob = new Blob([texto], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "dados_csgonet.txt";
+            a.click();
+            
+            URL.revokeObjectURL(url);
+        }
+
+        // ---------- LÓGICA DA ROLETA ----------
         function reconstruirRoleta(nomeSorteado) {
             roleta.innerHTML = "";
             for (let i = 0; i < 100; i++) {
@@ -509,14 +602,15 @@
                     items.forEach(i => i.classList.remove("highlight"));
                     alvo.classList.add("highlight");
                     resultado.textContent = `O item sorteado será: ${nomeSorteado}`;
+                    
                     itens[nomeSorteado] = 0;
                     salvarItens(itens);
-                    atualizarTabela();
+                    atualizarTabela(); // Atualiza a tabela (e restaura os inputs salvos automaticamente)
+                    
                     isSpinning = false;
                     lastSortedItem = nomeSorteado;
 
-                    // Toca som da Dlore se "Sabedoria do Dragão" for sorteada
-                    if (nomeSorteado.includes("Sabedoria do Dragão")) {
+                    if (nomeSorteado.includes("Gungnir")) {
                         if(dloreSound) dloreSound.play().catch(e => console.log(e));
                     }
 
